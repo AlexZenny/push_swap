@@ -12,43 +12,43 @@
 
 #include "push_swap.h"
 
-void	swap(t_list **list)
+void	swap(t_list **lst)
 {
 	t_list	*temp;
 
-	if ((!(*list)) || (!(*list)->next))
+	if ((!(*lst)) || (!(*lst)->next))
 		return ;
-	temp = (*list)->next;
-	(*list)->next = temp->next;
-	temp->next = *list;
-	*list = temp;
+	temp = (*lst)->next;
+	(*lst)->next = temp->next;
+	temp->next = *lst;
+	*lst = temp;
 }
 
-void	swap_both(t_list **list_a, t_list **list_b)
+void	swap_both(t_list **lst_a, t_list **lst_b)
 {
-	swap(list_a);
-	swap(list_b);
+	swap(lst_a);
+	swap(lst_b);
 }
 
 // #include <stdio.h>
 //
 // int	main(void)
 // {
-// 	t_list *list_a1 = malloc(sizeof(t_list));
-// 	t_list *list_a2 = malloc(sizeof(t_list));	
-// 	t_list *list_b1 = malloc(sizeof(t_list));
-// 	t_list *list_b2 = malloc(sizeof(t_list));
+// 	t_list *lst_a1 = malloc(sizeof(t_list));
+// 	t_list *lst_a2 = malloc(sizeof(t_list));	
+// 	t_list *lst_b1 = malloc(sizeof(t_list));
+// 	t_list *lst_b2 = malloc(sizeof(t_list));
 //
-// 	list_a1->next = list_a2;
-// 	list_a1->value = 1;
-// 	list_a2->value = 2;	
-// 	list_b1->next = list_b2;
-// 	list_b1->value = 1;
-// 	list_b2->value = 2;
+// 	lst_a1->next = lst_a2;
+// 	lst_a1->value = 1;
+// 	lst_a2->value = 2;	
+// 	lst_b1->next = lst_b2;
+// 	lst_b1->value = 1;
+// 	lst_b2->value = 2;
 //
-// 		printf("pre: a1 == %d, a2 == %d\n", list_a1->value, list_a1->next->value);
-// 		printf("pre: b1 == %d, b2 == %d\n", list_b1->value, list_b1->next->value);
-// 		swap_both(&list_a1, &list_b1);
-// 		printf("aft: a1 == %d, a2 == %d\n", list_a1->value, list_a1->next->value);
-// 		printf("pre: b1 == %d, b2 == %d\n", list_b1->value, list_b1->next->value);
+// 		printf("pre: a1 == %d, a2 == %d\n", lst_a1->value, lst_a1->next->value);
+// 		printf("pre: b1 == %d, b2 == %d\n", lst_b1->value, lst_b1->next->value);
+// 		swap_both(&lst_a1, &lst_b1);
+// 		printf("aft: a1 == %d, a2 == %d\n", lst_a1->value, lst_a1->next->value);
+// 		printf("pre: b1 == %d, b2 == %d\n", lst_b1->value, lst_b1->next->value);
 // }
