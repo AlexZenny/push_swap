@@ -15,6 +15,9 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
+# include <math.h>
+
 typedef struct s_list
 {
 	int				value;
