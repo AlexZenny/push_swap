@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/17 22:17:42 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/19 21:22:01 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,38 @@ int is_number(char *str)
     if (str[0] == '-' || str[0] == '+')
         i++;
     if (str[i] == '\0')
-        return(-1);
+        return(1);
     while(str[i] != '\0')
     {
         if (str[i] < '0' || str[i] > '9')
-            return(-1);
+            return(1);
         i++;
     }
-    return(1);
+    return(0);
 }
-int *ft_create_array( int argc, char *argv[], int count)
+int ft_create_stack( int argc, char *argv[], t_list **stack_a)
 {
     long value;
-    int *array;
     int      i;
-    int      j;
 
-    i = 0;
-    j = 0;
-    array = malloc(count*sizeof(*array));
-    if (array == NULL)
-        return(NULL);
+    i = 1;
     while (i < argc)
     {
-        if (is_number(argv[i]) == 1)
+        if (argv[i][0] == '-' && argv[i][1] == '-')
+            i++;
+        if ((is_number(argv[i])) == 0)
         {
-            value = atoi(argv[i]);
-            array[j] = value;
-            j++;
+            value = atol(argv[i]);
+            if (value > INT_MAX || value < INT_MIN)
+                return (1);
+            if (stack->value != value)
+                stack_a = ft_addback(&stack_a,(int ) value)
         }
+        else
+            return(1);
         i++;
     }
-    return(array);
+    return(0);
 }
 int ft_strncmp(const char *s1, const char *s2, size_t size)
 {
@@ -74,9 +74,6 @@ int ft_strncmp(const char *s1, const char *s2, size_t size)
 }
 int ft_flags(const char *cursor, t_options *options)
 { 
-    /*using enums here, declared in .h file. Saw a videos on youtube that 
-    it can be a way to handle flags and asked chat about it, but 
-    need to figure out later how to use them in algorithms :)*/
     if (ft_strncmp(cursor, "--simple", 9) == 0)
         options->mode = SIMPLE;
     else if (ft_strncmp(cursor, "--medium", 9) == 0)
@@ -95,43 +92,38 @@ int input_parser(int argc, char *argv[], t_options *options)
 {
     char *cursor;
     int i;
-    unsigned int count;
     
     i = 1;
-    count = 0;
     while ( i < argc)
     {
         cursor = argv[i];
         if (cursor[0] == '-' && cursor[1] == '-' )
         {   
             if(ft_flags(cursor, options) == 1)
-                return(-1);
+                return(1);
         }
-        else if (*cursor >= '0' && *cursor <= '9' 
-            || *cursor == '+' || *cursor == '-' )
-        {
-            count+= is_number(cursor);
-        }
-        else
-            return(-1);
-        /*using -1 as error so we can pass 1 when there is 1 argument*/
+        else if (is_number(cursor) == 1)
+            return(1);
         i++;
     } 
-    return(count);
+    return(0);
 }
 int main(int argc, char* argv[])
 {
     t_options   options;
-    int           count;
-    int           *array;
+    int           status;
+    t_list       *stack_a;
     
     options.mode = ADAPTIVE;
     options.bench = false;
+    stack_a = NULL;
+    stack_b = NULL;
     
-    count = input_parser(argc, argv, &options);
-    if (count < 0)
+    status = input_parser(argc, argv, &options);
+    if (status == 1)
         printf("Error\n");
-    array = ft_create_array(argc, argv, count);
+    if (status == 0)
+        ft_create_stack(argc, argv, &stack_a);
     printf("%d\n", count);
     int i = 0;
     while (i < count)
