@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/17 19:31:33 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/20 22:19:00 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum e_mode
 typedef struct s_options
 {
 	t_mode	mode;
+	int		mode_status;
 	bool	bench;
 }			  t_options;
 
