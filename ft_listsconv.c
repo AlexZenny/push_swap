@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 14:04:16 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/17 11:32:58 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/20 23:54:14 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,65 @@ void ft_deallocate(t_list **stack_a)
 	}
 	free(first);
 	*stack_a = NULL;
+}
+int ft_is_dublicate(t_list **stack_a, int value)
+{
+    t_list *curr;
+    t_list *head;
+
+    head = *stack_a;
+    curr = head;
+    if (*stack_a == NULL || stack_a == NULL)
+        return(0);
+    while (1)
+    {
+       	if (curr->value == value)
+        	return (1);
+    	curr = curr->next; 
+        if (curr == head)
+            break ;
+    }
+    return(0);
+}
+int ft_is_number(char *str)
+{
+    int i;
+
+    i = 0;
+    if (str[0] == '-' || str[0] == '+')
+        i++;
+    if (str[i] == '\0')
+        return(1);
+    while(str[i] != '\0')
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return(1);
+        i++;
+    }
+    return(0);
+}
+int ft_create_stack( int argc, char *argv[], t_list **stack_a)
+{
+    long value;
+    int      i;
+
+    i = 1;
+    while (i < argc)
+    {
+        if (argv[i][0] == '-' && argv[i][1] == '-')
+        {
+            i++;
+            continue ;
+        }
+        value = ft_atol(argv[i]);
+        if (value > INT_MAX || value < INT_MIN)
+            return (1);
+        if (ft_is_dublicate(stack_a, value) == 1)
+            return(1);
+        ft_addback(stack_a,(int ) value);
+        i++;
+    }
+    return(0);
 }
 // int	main(void)
 // {

@@ -1,7 +1,12 @@
 CFILES = ft_listsconv.c\
 	rotate_ops.c\
+	rev_rotate_ops.c\
 	swap.c\
 	push.c\
+	libft.c\
+	ft_main.c\
+	disorder.c\
+
 
 OBJFILES = $(CFILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 22:12:30 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/19 22:32:32 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/20 23:51:18 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_rev_rotate(t_list **stack)
 {
-	t_list	*temp;
-
 	if (stack == NULL || *stack == NULL)
 		return ;
 	*stack = (*stack)->prev;

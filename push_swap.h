@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/20 22:19:00 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/20 23:47:05 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <math.h>
+#include <limits.h>
 
 typedef struct s_list
 {
@@ -40,10 +41,23 @@ typedef struct s_options
 	bool	bench;
 }			  t_options;
 
+void	swap(t_list **lst);
+void	swap_both(t_list **lst_a, t_list **lst_b);
+void	push(t_list **lst_from, t_list **lst_to);
 void	ft_rotate(t_list **stack);
 void	ft_rotate_both(t_list **stack_a, t_list **stack_b);
+void	ft_rev_rotate(t_list **stack);
+void	ft_rev_rotate_both(t_list **stack_a, t_list **stack_b);
 void	ft_addback(t_list **stack_a, int i);
 void	ft_deallocate(t_list **stack_a);
 int		ft_strncmp (const char *s1, const char *s2, size_t size);
+long	ft_atol(const char *nptr);
+int		ft_is_dublicate(t_list **stack_a, int value);
+int		ft_is_number(char *str);
+int 	ft_create_stack( int argc, char *argv[], t_list **stack_a);
+int		ft_mode_status(t_options *options, t_mode mode);
+int		ft_flags(const char *cursor, t_options *options);
+int		input_parser(int argc, char *argv[], t_options *options);
+float	calculate_disorder(t_list **stack);
 
 #endif
