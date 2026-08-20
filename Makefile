@@ -7,9 +7,8 @@ CFILES = ft_listsconv.c\
 	ft_main.c\
 	disorder.c\
 
-
-OBJFILES = $(CFILES:.c=.o)
-
+OBJ_DIR = obj
+OBJFILES = $(CFILES:%.c=$(OBJ_DIR)/%.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -20,7 +19,8 @@ all: $(NAME)
 $(NAME) : $(OBJFILES)
 	$(AR) $(NAME) $(OBJFILES)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
