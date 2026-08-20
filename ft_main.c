@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/20 23:16:51 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/20 23:24:35 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,11 @@ int main(int argc, char* argv[])
     {
         status = ft_create_stack(argc, argv, &stack_a);
         if (status == 1)
+        {
             printf("Error\n");
+            ft_deallocate(&stack_a);
+            return(1);
+        }
     }
 
  t_list	*temp;
