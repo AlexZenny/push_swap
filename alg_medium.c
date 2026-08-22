@@ -6,47 +6,53 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/22 10:20:02 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:07:22 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	limited_insertion_sort(t_list *lst, int limit)
+void	limited_insertion_sort(t_list **stack_a, t_list **stack_b, int chunk_size)
 {
 	int		i;
+	bool	unsorted;
 
-	if (!(*lst))
+	if ((!(*stack_a)) || (!(*stack_a)))
 		return ;
 	i = 0;
-	while ((i++) <= limit)
+	while ((i++) < chunk_size)
+		push(stack_a, stack_b);
+	i = 0;
+	unsorted = true;
+	while (unsorted == true && (i++) < chunk_size)
 	{
-		if ((*lst)->value > (*lst)->next->value)
+		if ((*stack_b)->value > (*stack_b)->next->value)
 		{
-			swap(*lst);
+			swap(stack_b);
 			i = 0;
 		}
-		ft_rotate(&lst);
+		ft_rotate(stack_b);
 	}
 }
 
-void	chunk_merge_sort(t_list **stack_a, t_list **stack_b, int n)
-{
-	int	chunk_size;
-	int	last_chunk_size;
-
-	if ((!(*stack_a)) || (!(*stack_b_)))
-		return ;
-	chunk_size = ft_sqrt(n);
-	last_chunk_size = chunk_size;
-	if (chunk_size * chunk_size < n)
-		last_chunk_size += n - (chunk_size * chunk_size)
-}
+// void	chunk_merge_sort(t_list **stack_a, t_list **stack_b, int n)
+// {
+// 	int	chunk_size;
+// 	int	last_chunk_size;
+//
+// 	if ((!(*stack_a)) || (!(*stack_b_)))
+// 		return ;
+// 	chunk_size = ft_sqrt(n);
+// 	last_chunk_size = chunk_size;
+// 	if (chunk_size * chunk_size < n)
+// 		last_chunk_size += n - (chunk_size * chunk_size)
+// }
 
 #include <stdio.h>
 
 int main(void)
 {
+int	i = 0;
 t_list *lst_a1 = malloc(sizeof(t_list));
 t_list *lst_a2 = malloc(sizeof(t_list));
 t_list *lst_a3 = malloc(sizeof(t_list));
@@ -112,5 +118,11 @@ lst_a13->value = -3;
 lst_a14->value = 27;
 lst_a15->value = 68;
 lst_a16->value = 11;
-chunk_merge_sort(&lst_a1, &lst_b1);
+// chunk_merge_sort(&lst_a1, &lst_b1);
+	limited_insertion_sort(&lst_a1, &lst_b1, 16);
+	while ((i++) < 16)
+	{
+		printf("%d, ", lst_a1->value);
+		lst_a1 = lst_a1->next;
+	}
 }
