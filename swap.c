@@ -6,28 +6,46 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:33:55 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/11 23:25:00 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/23 22:42:51 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_list **lst)
+static void	swap(t_list **stack)
 {
 	t_list	*temp;
 
-	if ((!(*lst)) || (!(*lst)->next))
-		return ;
-	temp = (*lst)->next;
-	(*lst)->next = temp->next;
-	temp->next = *lst;
-	*lst = temp;
+	temp = (*stack)->next;
+	(*stack)->next = temp->next;
+	temp->next = *stack;
+	*stack = temp;
 }
 
-void	swap_both(t_list **lst_a, t_list **lst_b)
+int	sa(t_list **stack_a)
 {
-	swap(lst_a);
-	swap(lst_b);
+	if ((!(*stack_a)) || (!(*stack_a)->next))
+		return (0);
+	swap(stack_a);
+	return (1); 
+}
+
+int	sb(t_list **stack_b)
+{
+	if ((!(*stack_b)) || (!(*stack_b)->next))
+		return (0);
+	swap(stack_b);
+	return (1); 
+}
+
+int	ss(t_list **stack_a, t_list **stack_b)
+{
+	if ((!(*stack_a)) || (!(*stack_a)->next)
+		|| (!(*stack_b)) || (!(*stack_b)->next))
+		return (0);
+	swap(stack_a);
+	swap(stack_b);
+	return (1);
 }
 
 // #include <stdio.h>

@@ -24,12 +24,10 @@ static void	detach_lst(t_list **stack, t_list *lst)
 		*stack = NULL;
 }
 
-int	push(t_list **stack_from, t_list **stack_to)
+static void	push(t_list **stack_from, t_list **stack_to)
 {
 	t_list	*temp;
 
-	if (!(*stack_from))
-		return (0);
 	temp = *stack_from;
 	detach_lst(stack_from, temp);	
 	if (*stack_to)
@@ -45,6 +43,21 @@ int	push(t_list **stack_from, t_list **stack_to)
 		temp->prev = temp;
 	}
 	*stack_to = temp;
+}
+
+int	pa(t_list **stack_a, t_list **stack_b)
+{
+	if (!(*stack_b))
+		return (0);
+	push(stack_b, stack_a);
+	return (1);
+}
+
+int	pb(t_list **stack_a, t_list **stack_b)
+{
+	if (!(*stack_a))
+		return (0);
+	push(stack_a, stack_b);
 	return (1);
 }
 

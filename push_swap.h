@@ -41,9 +41,11 @@ typedef struct s_options
 	bool	bench;
 }			  t_options;
 
-void	swap(t_list **lst);
-void	swap_both(t_list **lst_a, t_list **lst_b);
-int		push(t_list **stack_from, t_list **stack_to);
+int		pa(t_list **stack_a, t_list **stack_b);
+int		pb(t_list **stack_a, t_list **stack_b);
+int		sa(t_list **stack_a);
+int		sb(t_list **stack_b);
+int		ss(t_list **stack_a, t_list **stack_b);
 void	ft_rotate(t_list **stack);
 void	ft_rotate_both(t_list **stack_a, t_list **stack_b);
 void	ft_rev_rotate(t_list **stack);
