@@ -43,7 +43,7 @@ typedef struct s_options
 
 void	swap(t_list **lst);
 void	swap_both(t_list **lst_a, t_list **lst_b);
-void	push(t_list **lst_from, t_list **lst_to);
+int		push(t_list **stack_from, t_list **stack_to);
 void	ft_rotate(t_list **stack);
 void	ft_rotate_both(t_list **stack_a, t_list **stack_b);
 void	ft_rev_rotate(t_list **stack);

@@ -12,21 +12,40 @@
 
 #include "push_swap.h"
 
-void	push(t_list **lst_from, t_list **lst_to)
+static void	detach_lst(t_list **stack, t_list *lst)
+{
+	if (lst != lst->next)
+	{
+		*stack = lst->next;
+		(*stack)->prev = lst->prev;
+		lst->prev->next = *stack;
+	}
+	else
+		*stack = NULL;
+}
+
+int	push(t_list **stack_from, t_list **stack_to)
 {
 	t_list	*temp;
 
-	if ((!(*lst_from)) || (!(*lst_to)))
-		return ;
-	temp = *lst_from;
-	*lst_from = temp->next;
-	(*lst_from)->prev = temp->prev;
-	temp->prev->next = *lst_from;
-	temp->next = *lst_to;
-	temp->prev = (*lst_to)->prev;
-	(*lst_to)->prev->next = temp;
-	(*lst_to)->prev = temp;
-	*lst_to = temp;
+	if (!(*stack_from))
+		return (0);
+	temp = *stack_from;
+	detach_lst(stack_from, temp);	
+	if (*stack_to)
+	{
+		temp->next = *stack_to;
+		temp->prev = (*stack_to)->prev;
+		(*stack_to)->prev->next = temp;
+		(*stack_to)->prev = temp;
+	}
+	else
+	{
+		temp->next = temp;
+		temp->prev = temp;
+	}
+	*stack_to = temp;
+	return (1);
 }
 
 // #include <stdio.h>
