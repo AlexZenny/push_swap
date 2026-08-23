@@ -6,32 +6,87 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/22 17:07:22 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/22 21:08:02 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	ft_rev_rotate(t_list **stack)
+{
+	if (stack == NULL || *stack == NULL)
+		return ;
+	*stack = (*stack)->prev;
+}
+
+void	ft_rotate(t_list **stack)
+{
+	t_list	*temp;
+
+	if (stack == NULL || *stack == NULL)
+		return ;
+	temp = *stack;
+	*stack = (*stack)->prev;
+	(*stack)->next = temp;
+}
+
+void	swap(t_list **lst)
+{
+	t_list	*temp;
+
+	if ((!(*lst)) || (!(*lst)->next))
+		return ;
+	temp = (*lst)->next;
+	(*lst)->next = temp->next;
+	temp->next = *lst;
+	*lst = temp;
+}
+
+void	push(t_list **lst_from, t_list **lst_to)
+{
+	t_list	*temp;
+
+	if ((!(*lst_from)) || (!(*lst_to)))
+		return ;
+	temp = *lst_from;
+	*lst_from = temp->next;
+	(*lst_from)->prev = temp->prev;
+	temp->prev->next = *lst_from;
+	temp->next = *lst_to;
+	temp->prev = (*lst_to)->prev;
+	(*lst_to)->prev->next = temp;
+	(*lst_to)->prev = temp;
+	*lst_to = temp;
+}
+
 void	limited_insertion_sort(t_list **stack_a, t_list **stack_b, int chunk_size)
 {
 	int		i;
-	bool	unsorted;
+	bool	forward;
 
-	if ((!(*stack_a)) || (!(*stack_a)))
+	if (!(*stack_a))
 		return ;
 	i = 0;
 	while ((i++) < chunk_size)
+	{
+		if (!(*stack_b))
+			*stack_b = (*stack_a);
 		push(stack_a, stack_b);
+	}
+	forward = true;
 	i = 0;
-	unsorted = true;
-	while (unsorted == true && (i++) < chunk_size)
+	while ((i++) < chunk_size)
 	{
 		if ((*stack_b)->value > (*stack_b)->next->value)
 		{
 			swap(stack_b);
+			forward = !forward;
 			i = 0;
 		}
-		ft_rotate(stack_b);
+		if (forward)
+			ft_rotate(stack_b);
+		else
+			ft_rev_rotate(stack_b);
 	}
 }
 
