@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/20 23:47:05 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/24 13:52:39 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ typedef struct s_options
 	int		mode_status;
 	bool	bench;
 }			  t_options;
+
+typedef struct s_ops_counters
+{
+	int sa_count;
+	int sb_count;
+	int ss_count;
+	int pa_count;
+	int ra_count;
+	int rb_count;
+	int rr_count;
+	int rra_count;
+	int rrb_count;
+	int rrr_count;
+	int total_count;
+}			t_ops_counters;
 
 int		pa(t_list **stack_a, t_list **stack_b);
 int		pb(t_list **stack_a, t_list **stack_b);
