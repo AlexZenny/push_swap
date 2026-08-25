@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/24 13:52:39 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/24 18:45:12 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <math.h>
-#include <limits.h>
+# include <limits.h>
+# include "ft_printf/ft_printf.h"
 
 typedef struct s_list
 {
@@ -61,6 +62,7 @@ int		pb(t_list **stack_a, t_list **stack_b);
 int		sa(t_list **stack_a);
 int		sb(t_list **stack_b);
 int		ss(t_list **stack_a, t_list **stack_b);
+void	ft_print_stacks(t_list **stack_a, t_list **stack_b);
 void	ft_rotate(t_list **stack);
 void	ft_rotate_both(t_list **stack_a, t_list **stack_b);
 void	ft_rev_rotate(t_list **stack);

@@ -16,10 +16,14 @@ static void	swap(t_list **stack)
 {
 	t_list	*temp;
 
-	temp = (*stack)->next;
-	(*stack)->next = temp->next;
-	temp->next = *stack;
-	*stack = temp;
+	temp = (*stack);
+	*stack = temp->next;
+	temp->next = (*stack)->next;
+	(*stack)->next = temp;
+	(*stack)->prev = temp->prev;
+	temp->prev = (*stack);
+	temp->next->prev = temp;
+	(*stack)->prev->next = *stack;
 }
 
 int	sa(t_list **stack_a)

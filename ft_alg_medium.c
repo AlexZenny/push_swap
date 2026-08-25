@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alg_medium.c                                       :+:      :+:    :+:   */
+/*   ft_alg_medium.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/23 19:36:07 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/25 01:07:05 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,92 @@
 
 void	ft_rev_rotate(t_list **stack)
 {
-	if (stack == NULL || *stack == NULL)
+	if (!(*stack) || (*stack) == (*stack)->prev)
 		return ;
 	*stack = (*stack)->prev;
 }
 
 void	ft_rotate(t_list **stack)
 {
-	t_list	*temp;
-
-	if (stack == NULL || *stack == NULL)
+	if (!(*stack) || (*stack) == (*stack)->next)
 		return ;
-	temp = *stack;
-	*stack = (*stack)->prev;
-	(*stack)->next = temp;
+	*stack = (*stack)->next;
 }
 
-void	swap(t_list **lst)
-{
-	t_list	*temp;
-
-	if ((!(*lst)) || (!(*lst)->next))
-		return ;
-	temp = (*lst)->next;
-	(*lst)->next = temp->next;
-	temp->next = *lst;
-	*lst = temp;
-}
-
-void	limited_insertion_sort(t_list **stack_a, t_list **stack_b, int chunk_size)
+void	experimental_sort(t_list **stack_a, t_list **stack_b, int chunk_size)
 {
 	int		i;
-	bool	forward;
+	bool	back;
+	int		ops;
 
+	ops = 0;
 	if (!(*stack_a))
 		return ;
 	i = 0;
 	while ((i++) < chunk_size)
-		push(stack_a, stack_b);
-	forward = true;
+	{
+		pb(stack_a, stack_b);
+		ft_printf("pb\n");
+		ops++;
+	}
+	back = false;
 	i = 0;
 	while ((i++) < chunk_size)
 	{
-		if ((*stack_b)->value > (*stack_b)->next->value)
+		if ((*stack_b)->value < (*stack_b)->next->value)
 		{
-			swap(stack_b);
-			forward = !forward;
+			sb(stack_b);
+			ft_printf("sb\n");
+			ops++;
+			back = !back;
+			ft_print_stacks(stack_a, stack_b);
 			i = 0;
 		}
-		if (forward)
-			ft_rotate(stack_b);
-		else
+		if (back)
+		{
 			ft_rev_rotate(stack_b);
+			ft_printf("rrb\n");
+			ft_print_stacks(stack_a, stack_b);
+			ops++;
+		}
+		else
+		{
+			ft_rotate(stack_b);
+			ft_printf("rb\n");
+			ft_print_stacks(stack_a, stack_b);
+			ops++;
+		}
+	}
+	i = 0;
+	while ((i++) < chunk_size)
+	{
+		pa(stack_a, stack_b);
+		ft_printf("pa\n");
+		ops++;
 	}
 }
 
-// void	chunk_merge_sort(t_list **stack_a, t_list **stack_b, int n)
-// {
-// 	int	chunk_size;
-// 	int	last_chunk_size;
-//
-// 	if ((!(*stack_a)) || (!(*stack_b_)))
-// 		return ;
-// 	chunk_size = ft_sqrt(n);
-// 	last_chunk_size = chunk_size;
-// 	if (chunk_size * chunk_size < n)
-// 		last_chunk_size += n - (chunk_size * chunk_size)
-// }
+void	merge_chunks(t_list **stack_a, t_list **stack_b, int c_size, int c_count)
+{
+	int	i;
+	int	k;
+	int	min;
 
-#include <stdio.h>
+	i = 0;
+	min = (*stack_a)->value;
+	while ((i++) < c_count)
+	{
+		k = 0;
+		while ((k++) < c_size)
+			ra(stack_a);
+		if ((*stack_a)->value < min)
+			min = (*stack_a)->value;
+	}
+}
 
 int main(void)
 {
-	int	i = 0;
+	// int	i = 0;
 	t_list *lst_a1 = malloc(sizeof(t_list));
 	t_list *lst_a2 = malloc(sizeof(t_list));
 	t_list *lst_a3 = malloc(sizeof(t_list));
@@ -152,16 +165,7 @@ int main(void)
 	lst_a14->value = 27;
 	lst_a15->value = 68;
 	lst_a16->value = 11;
-	// limited_insertion_sort(&lst_a1, &lst_b1, 16);
-	// while ((i++) < 16)
-	// {
-	// 	printf("%d, ", lst_a1->value);
-	// 	lst_a1 = lst_a1->next;
-	// }
-	while ((i++) <= 14)
-		push(&lst_a1, &lst_b1);
-	if (lst_a1)
-		printf("%d\n", lst_a1->value);
-	else
-		printf("NULL\n");
+	ft_print_stacks(&lst_a1, &lst_b1);
+	experimental_sort(&lst_a1, &lst_b1, 16);
+	ft_print_stacks(&lst_a1, &lst_b1);
 }

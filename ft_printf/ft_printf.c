@@ -1,0 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/13 17:47:14 by azieniuk          #+#    #+#             */
+/*   Updated: 2026/07/19 13:44:21 by ubuntu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+static void	ft_handle_pointer(int *cc, va_list args)
+{
+	unsigned long long	p;
+
+	p = (unsigned long long)va_arg(args, void *);
+	if (!p)
+	{
+		ft_putstr("(nil)", cc);
+		return ;
+	}
+	ft_putstr("0x", cc);
+	ft_puthex(p, HEX_OFFSET_LOW_CASE, cc);
+}
+
+static void	ft_parseconv(char cnv, int *cc, va_list args)
+{
+	if (cnv == 'c')
+		ft_putchar(va_arg(args, int), cc);
+	if (cnv == '%')
+		ft_putchar('%', cc);
+	if (cnv == 'd' || cnv == 'i')
+		ft_putnbr(va_arg(args, int), cc);
+	if (cnv == 'u')
+		ft_putnbr_unsigned(va_arg(args, unsigned int), cc);
+	if (cnv == 's')
+		ft_putstr(va_arg(args, char *), cc);
+	if (cnv == 'x')
+		ft_puthex(va_arg(args, unsigned int), HEX_OFFSET_LOW_CASE, cc);
+	if (cnv == 'X')
+		ft_puthex(va_arg(args, unsigned int), HEX_OFFSET_UP_CASE, cc);
+	if (cnv == 'p')
+		ft_handle_pointer(cc, args);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		i;
+	int		cc;
+
+	va_start(args, format);
+	i = 0;
+	cc = 0;
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1])
+		{
+			ft_parseconv(format[++i], &cc, args);
+			i++;
+		}
+		else
+			ft_putchar(format[i++], &cc);
+	}
+	va_end(args);
+	return (cc);
+}
+
+// #include <stdio.h>
+// #include <limits.h>
+//
+// int	main(void)
+// {
+// 	char			c = 'A';
+// 	char			*s = NULL;
+// 	void			*p = s;
+// 	int				d = -1;
+// 	int				i = d;
+// 	unsigned int	u = -1;
+// 	int				x = INT_MIN;
+// 	int				X = INT_MAX;
+// 	int				c_count_a;
+// 	int				c_count_b;
+//
+// c_count_a = printf("og_printf(): c=%c, s=%s, p=%p, d=%d, i=%i, u=%u, "
+// 		"x=%x, X=%X, per=%%\n", c, s, p, d, i, u, x, X);
+// c_count_b = ft_printf("ft_printf(): c=%c, s=%s, p=%p, d=%d, i=%i, u=%u, "
+// 		"x=%x, X=%X, per=%%\n", c, s, p, d, i, u, x, X);
+// printf("c_count_a = %d\n", c_count_a);
+// printf("c_count_b = %d\n", c_count_b);
+// }
+// int	ft_printf(const char *format, ...) __attribute__((format(printf,1,2)))
