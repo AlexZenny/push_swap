@@ -3,33 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sorting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:43:26 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/25 14:48:18 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/25 23:09:55 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int rotation(t_list **stack_a, int min_position, int len)
+// int push_to_stack_b(t_list **stack_a, t_list **stack_b)
+// {
+//     push(stack_a, stack_b);
+// }
+int stack_len(t_list **stack_a)
 {
-    int counter;
+    int len;
+    t_list *current;
+    t_list *head;
 
-    counter = 0;
+    len = 1;
     if (stack_a == NULL || *stack_a == NULL)
         return(-1);
-    while (i != min_position)
+    head = *stack_a;
+    current = head;
+    current = current->next;
+    while(current != head)
     {
-        if (min_position <= len / 2)
-            ft_rotate(stack_a);
-        else 
-            ft_rev_rotate(stack_a);
-        counter++;
+        len++;
+        current = current->next;  
     }
-    return(counter);
-}
+    return(len);
+} 
+int rotation(t_list **stack_a, int min_position)
+{
+    int i;
+    int len;
 
+    i = 0;
+    len = stack_len(stack_a);
+    if (stack_a == NULL || *stack_a == NULL)
+        return(-1);
+    if (min_position <= len / 2)
+        while (i != min_position)
+        {
+           ft_rotate(stack_a);
+           i++; 
+        }
+    else 
+        while(i < len - min_position)
+        {
+            ft_rev_rotate(stack_a);
+            i++; 
+        }
+    return(i);
+}
 int find_min_position(t_list **stack_a)
 {
     t_list  *current;
@@ -58,35 +86,26 @@ int find_min_position(t_list **stack_a)
     }
     return(min_position); 
 }
-int stack_len(t_list **stack_a)
-{
-    int len;
-    t_list *current;
-    t_list *head;
-
-    len = 1;
-    if (stack_a == NULL || *stack_a == NULL)
-        return(-1);
-    head = *stack_a;
-    current = head;
-    current = current->next;
-    while(current != head)
-        len++;
-    return(len);
-} 
-
-void simple_sorting(t_list **stack_a, t_list *options, )
+void simple_sorting(t_list **stack_a, t_list **stack_b, t_options *opt)
 {
 t_list *first;
 t_list *cursor;
+int min_position;
 
 
 first = *stack_a;
 cursor = *stack_a;
 cursor = cursor->next;
-
-if (options.mode = SIMPLE)
+min_position = 0;
+if (opt->mode == SIMPLE)
 {
-
+    while (*stack_a != NULL)
+    {
+        min_position = find_min_position(stack_a);
+        rotation(stack_a, min_position);
+        pb(stack_a, stack_b); 
+    }
+    while (*stack_b != NULL)
+        pa(stack_b, stack_a);
 }
 }
