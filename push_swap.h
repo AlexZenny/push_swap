@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/24 18:45:12 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/26 01:08:34 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_addback(t_list **stack_a, int i);
 void	ft_deallocate(t_list **stack_a);
 int		ft_strncmp (const char *s1, const char *s2, size_t size);
 long	ft_atol(const char *nptr);
+int		ft_sqrt(int n);
 int		ft_is_dublicate(t_list **stack_a, int value);
 int		ft_is_number(char *str);
 int 	ft_create_stack( int argc, char *argv[], t_list **stack_a);

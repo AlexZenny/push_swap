@@ -6,7 +6,7 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/25 01:07:05 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/25 21:14:53 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,80 +26,77 @@ void	ft_rotate(t_list **stack)
 	*stack = (*stack)->next;
 }
 
-void	experimental_sort(t_list **stack_a, t_list **stack_b, int chunk_size)
+void	push_chunks_b(t_list **stack_a, t_list **stack_b, int *c_sizes, int n)
 {
+	t_list	*temp;
+	int		c_count;
+	int		rank;
+	int		cur;
 	int		i;
-	bool	back;
-	int		ops;
+	int		k;
+	int		m;
 
-	ops = 0;
-	if (!(*stack_a))
-		return ;
 	i = 0;
-	while ((i++) < chunk_size)
+	temp = (*stack_a);
+	c_count = ft_sqrt(n);
+	while (i < c_count)
 	{
-		pb(stack_a, stack_b);
-		ft_printf("pb\n");
-		ops++;
-	}
-	back = false;
-	i = 0;
-	while ((i++) < chunk_size)
-	{
-		if ((*stack_b)->value < (*stack_b)->next->value)
-		{
-			sb(stack_b);
-			ft_printf("sb\n");
-			ops++;
-			back = !back;
-			ft_print_stacks(stack_a, stack_b);
-			i = 0;
+		m = 0;
+		while ((m++) < c_sizes[i])
+		{	
+			k = 0;
+			rank = 0;
+			cur = temp->value;
+			while ((k++) < n)
+			{
+				temp = temp->next;
+				if (cur < temp->value)
+					rank++;
+			}
+			if (rank < c_sizes[i])
+				pb(stack_a, stack_b);
 		}
-		if (back)
-		{
-			ft_rev_rotate(stack_b);
-			ft_printf("rrb\n");
-			ft_print_stacks(stack_a, stack_b);
-			ops++;
-		}
-		else
-		{
-			ft_rotate(stack_b);
-			ft_printf("rb\n");
-			ft_print_stacks(stack_a, stack_b);
-			ops++;
-		}
-	}
-	i = 0;
-	while ((i++) < chunk_size)
-	{
-		pa(stack_a, stack_b);
-		ft_printf("pa\n");
-		ops++;
+		i++;
 	}
 }
 
-void	merge_chunks(t_list **stack_a, t_list **stack_b, int c_size, int c_count)
+int	*find_chunk_sizes(int n, int c_count)
 {
+	int	*c_sizes;
+	int	rem;
 	int	i;
-	int	k;
-	int	min;
 
+	c_sizes = malloc(sizeof(int) * c_count);
+	if (!c_sizes)
+		return (NULL);
+	rem = n - c_count * c_count;
 	i = 0;
-	min = (*stack_a)->value;
-	while ((i++) < c_count)
+	while (i < c_count)
 	{
-		k = 0;
-		while ((k++) < c_size)
-			ra(stack_a);
-		if ((*stack_a)->value < min)
-			min = (*stack_a)->value;
+		c_sizes[i] = c_count;
+		if ((rem--) > 0)
+			c_sizes[i]++;
+		i++;
 	}
+	return (c_sizes);
 }
+
+void	chunk_sort(t_list **stack_a, t_list **stack_b, int n)
+{
+	t_list	*temp;
+	int		*c_sizes;
+	int		c_count;
+
+	c_count = ft_sqrt(n);
+	c_sizes = find_chunk_sizes(n, c_count);
+	push_chunks_b(stack_a, stack_b, c_sizes, n);
+	ft_print_stacks(stack_a, stack_b);
+}
+
+#include <stdio.h>
 
 int main(void)
 {
-	// int	i = 0;
 	t_list *lst_a1 = malloc(sizeof(t_list));
 	t_list *lst_a2 = malloc(sizeof(t_list));
 	t_list *lst_a3 = malloc(sizeof(t_list));
@@ -116,9 +113,11 @@ int main(void)
 	t_list *lst_a14 = malloc(sizeof(t_list));
 	t_list *lst_a15 = malloc(sizeof(t_list));
 	t_list *lst_a16 = malloc(sizeof(t_list));
+	t_list *lst_a17 = malloc(sizeof(t_list));
+	t_list *lst_a18 = malloc(sizeof(t_list));
 	t_list *lst_b1 = NULL;
 	lst_a1->next = lst_a2;
-	lst_a1->prev = lst_a16;
+	lst_a1->prev = lst_a18;
 	lst_a2->next = lst_a3;
 	lst_a2->prev = lst_a1;
 	lst_a3->next = lst_a4;
@@ -147,8 +146,12 @@ int main(void)
 	lst_a14->prev = lst_a13;
 	lst_a15->next = lst_a16;
 	lst_a15->prev = lst_a14;
-	lst_a16->next = lst_a1;
+	lst_a16->next = lst_a17;
 	lst_a16->prev = lst_a15;
+	lst_a17->next = lst_a18;
+	lst_a17->prev = lst_a16;
+	lst_a18->next = lst_a1;
+	lst_a18->prev = lst_a17;
 	lst_a1->value = 42;
 	lst_a2->value = -7;
 	lst_a3->value = 19;
@@ -165,7 +168,10 @@ int main(void)
 	lst_a14->value = 27;
 	lst_a15->value = 68;
 	lst_a16->value = 11;
-	ft_print_stacks(&lst_a1, &lst_b1);
-	experimental_sort(&lst_a1, &lst_b1, 16);
-	ft_print_stacks(&lst_a1, &lst_b1);
+	lst_a17->value = 48;
+	lst_a18->value = 0;
+	chunk_sort(&lst_a1, &lst_b1, 18);
+	// ft_print_stacks(&lst_a1, &lst_b1);
+	// experimental_sort(&lst_a1, &lst_b1, 16);
+	// ft_print_stacks(&lst_a1, &lst_b1);
 }
