@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 22:12:30 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/20 23:51:18 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/26 23:33:12 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,23 @@ void	ft_rev_rotate(t_list **stack)
 		return ;
 	*stack = (*stack)->prev;
 }
-void	ft_rev_rotate_both(t_list **stack_a, t_list **stack_b)
+int	rra(t_list **stack_a)
+{
+	if ((!(*stack_a)) || (!(*stack_a)->next))
+		return (0);
+	ft_rev_rotate(stack_a);
+	ft_printf_fd(1, "rra\n");
+	return (1); 
+}
+int	rrb(t_list **stack_b)
+{
+	if ((!(*stack_b)) || (!(*stack_b)->next))
+		return (0);
+	ft_rev_rotate(stack_b);
+	ft_printf_fd(1, "rrb\n");
+	return (1); 
+}
+void	rrr(t_list **stack_a, t_list **stack_b)
 {
 	if (stack_a == NULL || *stack_a == NULL || 
 		stack_b == NULL || *stack_b == NULL)

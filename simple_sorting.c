@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:43:26 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/26 20:13:54 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/26 23:32:22 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int rotation(t_list **stack_a, int min_position)
     if (min_position <= len / 2)
         while (i != min_position)
         {
-           ft_rotate(stack_a);
+           ra(stack_a);
            i++; 
         }
     else 
         while(i < len - min_position)
         {
-            ft_rev_rotate(stack_a);
+            rra(stack_a);
             i++; 
         }
     return(i);

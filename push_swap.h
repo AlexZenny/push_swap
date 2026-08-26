@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 19:51:04 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/26 23:33:30 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,13 @@ int		sa(t_list **stack_a);
 int		sb(t_list **stack_b);
 int		ss(t_list **stack_a, t_list **stack_b);
 void	ft_rotate(t_list **stack);
-void	ft_rotate_both(t_list **stack_a, t_list **stack_b);
+int		ra(t_list **stack_a);
+int		rb(t_list **stack_a);
+void	rr(t_list **stack_a, t_list **stack_b);
 void	ft_rev_rotate(t_list **stack);
-void	ft_rev_rotate_both(t_list **stack_a, t_list **stack_b);
+int		rra(t_list **stack_a);
+int		rrb(t_list **stack_b);
+void	rrr(t_list **stack_a, t_list **stack_b);
 void	ft_addback(t_list **stack_a, int i);
 void	ft_deallocate(t_list **stack_a);
 int		ft_strncmp (const char *s1, const char *s2, size_t size);

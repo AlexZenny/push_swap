@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:33:50 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/14 15:59:25 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/26 23:28:41 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	pa(t_list **stack_a, t_list **stack_b)
 	if (!(*stack_b))
 		return (0);
 	push(stack_b, stack_a);
+	ft_printf_fd(1, "pa\n");
 	return (1);
 }
 
@@ -58,6 +59,7 @@ int	pb(t_list **stack_a, t_list **stack_b)
 	if (!(*stack_a))
 		return (0);
 	push(stack_a, stack_b);
+	ft_printf_fd(1, "pb\n");
 	return (1);
 }
 
