@@ -6,25 +6,30 @@ CFILES = ft_listsconv.c\
 	libft.c\
 	ft_main.c\
 	disorder.c\
+	simple_sorting.c\
+	ft_debug_stacks.c\
+	ft_printf/ft_printf.c\
+	ft_printf/ft_extras.c
 
 OBJ_DIR = obj
-OBJFILES = $(CFILES:%.c=$(OBJ_DIR)/%.o)
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
 
-NAME = push_swap.a
-AR = ar rcs 
+OBJFILES = $(CFILES:%.c=$(OBJ_DIR)/%.o)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
+
+NAME = push_swap
 all: $(NAME) 
 
 $(NAME) : $(OBJFILES)
-	$(AR) $(NAME) $(OBJFILES)
+	$(CC) $(CFLAGS) $(OBJFILES) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJFILES)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

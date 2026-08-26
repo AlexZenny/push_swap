@@ -3,42 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_debug_stacks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 17:45:27 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/24 19:53:41 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/26 20:03:31 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_print_stack(t_list **stack)
+static void	ft_print_stack(int fd, t_list **stack)
 {
     t_list *temp;
 
     temp = (*stack);
     if (!(*stack))
     {
-        ft_printf("NULL\n");
+        ft_printf_fd(fd,"NULL\n");
         return ;
     }
-    ft_printf("[ ");
-	ft_printf("%d ", temp->value);
+    ft_printf_fd(fd, "[ ");
+	ft_printf_fd(fd, "%d ", temp->value);
 	temp = temp->next;
 	while (temp != (*stack))
     {
-        ft_printf("%d ", temp->value);
+        ft_printf_fd(fd, "%d ", temp->value);
 		temp = temp->next;
     }
-	ft_printf("]\n");
+	ft_printf_fd(fd, "]\n");
 }
 
-void	ft_print_stacks(t_list **stack_a, t_list **stack_b)
+void	ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b)
 {
-    ft_printf("stack_a: ");
-    ft_print_stack(stack_a);
-    ft_printf("stack_b: ");
-    ft_print_stack(stack_b);
+    ft_printf_fd(fd, "stack_a: ");
+    ft_print_stack(fd, stack_a);
+    ft_printf_fd(fd, "stack_b: ");
+    ft_print_stack(fd, stack_b);
 }
 
 // int	main(void)

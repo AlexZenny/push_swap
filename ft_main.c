@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/20 23:52:47 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/26 19:46:05 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ int main(int argc, char* argv[])
     t_options   options;
     int           status;
     t_list       *stack_a;
+    t_list       *stack_b;
     
     options.mode = ADAPTIVE;
     options.mode_status = 0;
     options.bench = false;
     stack_a = NULL;
-    //stack_b = NULL;
+    stack_b = NULL;
     
     status = input_parser(argc, argv, &options);
     if (status == 1)
@@ -83,20 +84,21 @@ int main(int argc, char* argv[])
             return(1);
         }
     }
+    simple_sorting(&stack_a, &stack_b);
+    ft_print_stacks(2, &stack_a, &stack_b);
+    // t_list	*temp;
 
- t_list	*temp;
-
-    temp = stack_a;
-    if (temp != NULL)
-    {
-        while (1)
-        {
-            printf("%d, ", temp->value);
-            temp = temp->next;
-            if (temp == stack_a)
-            break ;
-        }
-    }
-    printf("\n");
-    return (0);
+    // temp = stack_a;
+    // if (temp != NULL)
+    // {
+    //     while (1)
+    //     {
+    //         printf("%d, ", temp->value);
+    //         temp = temp->next;
+    //         if (temp == stack_a)
+    //         break ;
+    //     }
+    // }
+    // printf("\n");
+    // return (0);
 }

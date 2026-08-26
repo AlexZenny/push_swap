@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 01:08:34 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/26 19:51:04 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int		pb(t_list **stack_a, t_list **stack_b);
 int		sa(t_list **stack_a);
 int		sb(t_list **stack_b);
 int		ss(t_list **stack_a, t_list **stack_b);
-void	ft_print_stacks(t_list **stack_a, t_list **stack_b);
 void	ft_rotate(t_list **stack);
 void	ft_rotate_both(t_list **stack_a, t_list **stack_b);
 void	ft_rev_rotate(t_list **stack);
@@ -80,4 +79,12 @@ int		ft_flags(const char *cursor, t_options *options);
 int		input_parser(int argc, char *argv[], t_options *options);
 float	calculate_disorder(t_list **stack);
 
+
+void	simple_sorting(t_list **stack_a, t_list **stack_b);
+bool	is_sorted(t_list *stack_a);
+int		find_min_position(t_list *stack_a);
+int		rotation(t_list **stack_a, int min_position);
+int		stack_len(t_list *stack_a);
+
+void	ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b);
 #endif
