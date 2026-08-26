@@ -26,6 +26,31 @@ void	ft_rotate(t_list **stack)
 	*stack = (*stack)->next;
 }
 
+int	*assign_ranks(t_list **stack, int *c_sizes, int n)
+{
+	t_list	*temp;
+	int		*rank;
+	int		cur;
+	int		i;
+
+	temp = (*stack);
+	cur = temp->value;
+	rank = malloc(sizeof(int) * n);
+	if (!rank)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		while (); 
+		{
+			if ()
+			{
+			}
+			temp = temp->next;
+		}
+	}
+}
+
 void	push_chunks_b(t_list **stack_a, t_list **stack_b, int *c_sizes, int n)
 {
 	t_list	*temp;
