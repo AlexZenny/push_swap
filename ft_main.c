@@ -86,19 +86,4 @@ int main(int argc, char* argv[])
     }
     simple_sorting(&stack_a, &stack_b);
     ft_print_stacks(2, &stack_a, &stack_b);
-    // t_list	*temp;
-
-    // temp = stack_a;
-    // if (temp != NULL)
-    // {
-    //     while (1)
-    //     {
-    //         printf("%d, ", temp->value);
-    //         temp = temp->next;
-    //         if (temp == stack_a)
-    //         break ;
-    //     }
-    // }
-    // printf("\n");
-    // return (0);
 }
