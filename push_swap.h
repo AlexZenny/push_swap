@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 23:33:30 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/28 01:29:34 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_list
 {
 	int				value;
+	int				rank;
 	struct s_list	*next;
 	struct s_list	*prev;
 }					t_list;

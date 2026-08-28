@@ -6,86 +6,37 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/25 21:14:53 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/27 15:34:14 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rev_rotate(t_list **stack)
-{
-	if (!(*stack) || (*stack) == (*stack)->prev)
-		return ;
-	*stack = (*stack)->prev;
-}
-
-void	ft_rotate(t_list **stack)
-{
-	if (!(*stack) || (*stack) == (*stack)->next)
-		return ;
-	*stack = (*stack)->next;
-}
-
-int	*assign_ranks(t_list **stack, int *c_sizes, int n)
+static void	assign_ranks(t_list **stack_a, int n)
 {
 	t_list	*temp;
-	int		*rank;
-	int		cur;
-	int		i;
-
-	temp = (*stack);
-	cur = temp->value;
-	rank = malloc(sizeof(int) * n);
-	if (!rank)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		while (); 
-		{
-			if ()
-			{
-			}
-			temp = temp->next;
-		}
-	}
-}
-
-void	push_chunks_b(t_list **stack_a, t_list **stack_b, int *c_sizes, int n)
-{
-	t_list	*temp;
-	int		c_count;
-	int		rank;
-	int		cur;
+	t_list	*cur;
 	int		i;
 	int		k;
-	int		m;
 
 	i = 0;
 	temp = (*stack_a);
-	c_count = ft_sqrt(n);
-	while (i < c_count)
+	while (i++ < n)
 	{
-		m = 0;
-		while ((m++) < c_sizes[i])
-		{	
-			k = 0;
-			rank = 0;
-			cur = temp->value;
-			while ((k++) < n)
-			{
-				temp = temp->next;
-				if (cur < temp->value)
-					rank++;
-			}
-			if (rank < c_sizes[i])
-				pb(stack_a, stack_b);
+		k = 0;
+		cur = temp;
+		cur->rank = 0;
+		while (k++ < n)
+		{
+			temp = temp->next;
+			if (cur->value > temp->value)
+				cur->rank++;	
 		}
-		i++;
+		temp = temp->next;
 	}
 }
 
-int	*find_chunk_sizes(int n, int c_count)
+static int	*find_chunk_sizes(int n, int c_count)
 {
 	int	*c_sizes;
 	int	rem;
@@ -99,26 +50,83 @@ int	*find_chunk_sizes(int n, int c_count)
 	while (i < c_count)
 	{
 		c_sizes[i] = c_count;
-		if ((rem--) > 0)
+		if (rem-- > 0)
 			c_sizes[i]++;
+		ft_printf_fd(1, "%d ", c_sizes[i]);
 		i++;
 	}
 	return (c_sizes);
 }
 
-void	chunk_sort(t_list **stack_a, t_list **stack_b, int n)
+static void	push_chunk_b(t_list **stack_a, t_list **stack_b, int c_size, int n)
 {
-	t_list	*temp;
-	int		*c_sizes;
-	int		c_count;
+	static int	max_rank = -1;
 
-	c_count = ft_sqrt(n);
-	c_sizes = find_chunk_sizes(n, c_count);
-	push_chunks_b(stack_a, stack_b, c_sizes, n);
-	ft_print_stacks(stack_a, stack_b);
+	max_rank += c_size;
+	while (n-- && c_size)
+	{
+		if ((*stack_a)->rank <= max_rank)
+		{
+			pb(stack_a, stack_b);
+			ft_print_stacks(1, stack_a, stack_b);
+			c_size--;
+		}
+		else
+		{
+			ra(stack_a);
+			ft_print_stacks(1, stack_a, stack_b);
+		}
+	}
 }
 
-#include <stdio.h>
+static void	sort_chunk_in_b(t_list **stack_a, t_list **stack_b, int c_size, int max_rank)
+{
+	bool	reverse;
+
+	reverse = false;
+	while (c_size > 0)
+	{
+		while ((*stack_b)->rank != max_rank)
+		{
+			if (!reverse)
+				rb(stack_b);
+			else
+				rrb(stack_b);
+		ft_print_stacks(1, stack_a, stack_b);
+		}
+		pa(stack_a, stack_b);
+		ft_print_stacks(1, stack_a, stack_b);
+		reverse = !reverse;
+		max_rank--;
+		c_size--;
+	}
+}
+
+void	medium_sort(t_list **stack_a, t_list **stack_b, int n)
+{
+	int		*c_sizes;
+	int		c_count;
+	int		i;
+	int		k;
+	int		m;
+
+	assign_ranks(stack_a, n);
+	c_count = ft_sqrt(n);
+	c_sizes = find_chunk_sizes(n, c_count);
+	i = 0;
+	k = 0;
+	ft_print_stacks(1, stack_a, stack_b);
+	while (k++ < c_count)
+		push_chunk_b(stack_a, stack_b, c_sizes[i++], n);
+	k = 0;
+	m = n - 1;
+	while (k++ <= c_count)
+	{
+		sort_chunk_in_b(stack_a, stack_b, c_sizes[i], m);
+		m -= c_sizes[i];
+		i--;
+	}
+}
 
 int main(void)
 {
@@ -195,8 +203,6 @@ int main(void)
 	lst_a16->value = 11;
 	lst_a17->value = 48;
 	lst_a18->value = 0;
-	chunk_sort(&lst_a1, &lst_b1, 18);
-	// ft_print_stacks(&lst_a1, &lst_b1);
-	// experimental_sort(&lst_a1, &lst_b1, 16);
-	// ft_print_stacks(&lst_a1, &lst_b1);
+	medium_sort(&lst_a1, &lst_b1, 18);
+	ft_print_stacks(1, &lst_a1, &lst_b1);
 }
