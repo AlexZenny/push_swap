@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:46:05 by tmalyshi          #+#    #+#             */
-/*   Updated: 2026/08/26 23:30:12 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/28 22:09:58 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ int	rb(t_list **stack_b)
 	ft_printf_fd(1, "rb\n");
 	return (1); 
 }
-void	rr(t_list **stack_a, t_list **stack_b)
+int	rr(t_list **stack_a, t_list **stack_b)
 {
 	if (stack_a == NULL || *stack_a == NULL || 
 		stack_b == NULL || *stack_b == NULL)
 		return ;
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
+	ft_printf_fd(1, "rr\n");
+	return (1);
 }
 
 

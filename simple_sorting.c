@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:43:26 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/26 23:32:22 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/28 21:46:44 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ bool is_sorted(t_list *stack_a)
     }
     return(true);
 }
-void simple_sorting(t_list **stack_a, t_list **stack_b)
+void simple_sort(t_list **stack_a, t_list **stack_b)
 {
 int min_position;
 

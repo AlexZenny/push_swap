@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/28 01:29:34 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/28 21:46:53 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		input_parser(int argc, char *argv[], t_options *options);
 float	calculate_disorder(t_list **stack);
 
 
-void	simple_sorting(t_list **stack_a, t_list **stack_b);
+void	simple_sort(t_list **stack_a, t_list **stack_b);
 bool	is_sorted(t_list *stack_a);
 int		find_min_position(t_list *stack_a);
 int		rotation(t_list **stack_a, int min_position);

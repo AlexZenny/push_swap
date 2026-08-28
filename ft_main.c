@@ -6,13 +6,27 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/26 19:46:05 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/28 21:46:36 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
+void run_sort(t_list **stack_a, t_list **stack_b, t_options *options)
+{
+    float disorder;
+
+    disorder = calculate_disorder(stack_a);
+    if (options.mode == SIMPLE)
+        simple_sort(&stack_a, &stack_b);
+    if else (options.mode == MEDIUM)
+        medium_sort(&stack_a, &stack_b, stack_len(*stack_a));
+    if else (options.mode == COMPLEX)
+        complex_sort(&stack_a, &stack_b);
+    else  
+        adaptive_sort(&stack_a, &stack_b, disorder);
+}
 int ft_mode_status(t_options *options, t_mode mode)
 {
     if (options->mode_status == 1)
