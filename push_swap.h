@@ -84,12 +84,14 @@ int		ft_flags(const char *cursor, t_options *options);
 int		input_parser(int argc, char *argv[], t_options *options);
 float	calculate_disorder(t_list **stack);
 
-
 void	simple_sort(t_list **stack_a, t_list **stack_b);
+void	medium_sort(t_list **stack_a, t_list **stack_b, int n);
 bool	is_sorted(t_list *stack_a);
 int		find_min_position(t_list *stack_a);
 int		rotation(t_list **stack_a, int min_position);
 int		stack_len(t_list *stack_a);
+void	assign_ranks(t_list **stack_a, int n);
+int		find_shortest_path(t_list **stack, int target_rank);
 
 void	ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b);
 #endif
