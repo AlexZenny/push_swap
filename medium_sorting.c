@@ -6,7 +6,7 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/29 05:32:36 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/29 21:20:57 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ int	*find_chunk_sizes(int n, int c_count)
 	return (c_sizes);
 }
 
-void	pb_chunk(t_list **st_a, t_list **st_b, int c_size, int *max_rank, int n)
+int	pb_chunk(t_list **st_a, t_list **st_b, int c_size, int n)
 {
-	(*max_rank) += c_size;
+	static int	max_rank = -1;
+
+	max_rank += c_size;
 	while (n-- && c_size)
 	{
-		if ((*st_a)->rank <= (*max_rank))
+		if ((*st_a)->rank <= max_rank)
 		{
 			pb(st_a, st_b);
 			c_size--;
@@ -46,6 +48,7 @@ void	pb_chunk(t_list **st_a, t_list **st_b, int c_size, int *max_rank, int n)
 		else
 			ra(st_a);
 	}
+	return (max_rank);
 }
 
 void	extract_chunk(t_list **st_a, t_list **st_b, int c_size, int *max_rank)
@@ -79,9 +82,8 @@ void	medium_sort(t_list **stack_a, t_list **stack_b, int n)
 	c_count = ft_sqrt(n);
 	c_sizes = find_chunk_sizes(n, c_count);
 	i = 0;
-	max_rank = -1;
 	while (i < c_count)
-		pb_chunk(stack_a, stack_b, c_sizes[i++], &max_rank, n);
+		max_rank = pb_chunk(stack_a, stack_b, c_sizes[i++], n);
 	while (i--)
 		extract_chunk(stack_a, stack_b, c_sizes[i], &max_rank);
 }

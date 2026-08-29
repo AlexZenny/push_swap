@@ -34,11 +34,12 @@ int	rrb(t_list **stack_b)
 	ft_printf_fd(1, "rrb\n");
 	return (1); 
 }
-void	rrr(t_list **stack_a, t_list **stack_b)
+int	rrr(t_list **stack_a, t_list **stack_b)
 {
 	if (stack_a == NULL || *stack_a == NULL || 
 		stack_b == NULL || *stack_b == NULL)
-		return ;
+		return (0);
 	ft_rev_rotate(stack_a);
 	ft_rev_rotate(stack_b);
+	return (1);
 }

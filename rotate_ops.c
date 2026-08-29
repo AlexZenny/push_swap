@@ -39,13 +39,9 @@ int	rr(t_list **stack_a, t_list **stack_b)
 {
 	if (stack_a == NULL || *stack_a == NULL || 
 		stack_b == NULL || *stack_b == NULL)
-		return ;
+		return (0);
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
 	ft_printf_fd(1, "rr\n");
 	return (1);
 }
-
-
-
-
