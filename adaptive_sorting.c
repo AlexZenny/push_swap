@@ -1,92 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   medium_sorting.c                                   :+:      :+:    :+:   */
+/*   adaptive_sorting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/29 21:20:57 by azieniuk         ###   ########.fr       */
+/*   Created: 2026/08/29 23:42:09 by azieniuk          #+#    #+#             */
+/*   Updated: 2026/08/29 23:43:36 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*find_chunk_sizes(int n, int c_count)
+void	adaptive_sort(t_list **stack_a, t_list **stack_b, int n)
 {
-	int	*c_sizes;
-	int	rem;
-	int	i;
+	float	dis;
 
-	c_sizes = malloc(sizeof(int) * c_count);
-	if (!c_sizes)
-		return (NULL);
-	rem = n - c_count * c_count;
-	i = 0;
-	while (i < c_count)
-	{
-		c_sizes[i] = c_count;
-		if (rem-- > 0)
-			c_sizes[i]++;
-		i++;
-	}
-	return (c_sizes);
-}
-
-int	pb_chunk(t_list **st_a, t_list **st_b, int c_size, int n)
-{
-	static int	max_rank = -1;
-
-	max_rank += c_size;
-	while (n-- && c_size)
-	{
-		if ((*st_a)->rank <= max_rank)
-		{
-			pb(st_a, st_b);
-			c_size--;
-		}
-		else
-			ra(st_a);
-	}
-	return (max_rank);
-}
-
-void	extract_chunk(t_list **st_a, t_list **st_b, int c_size, int *max_rank)
-{
-	int		dir;
-
-	while (c_size > 0)
-	{
-		dir = find_shortest_path(st_b, *max_rank);
-		while ((*st_b)->rank != (*max_rank))
-		{
-			if (dir >= 0)
-				rb(st_b);
-			else
-				rrb(st_b);
-		}
-		pa(st_a, st_b);
-		(*max_rank)--;
-		c_size--;
-	}
-}
-
-void	medium_sort(t_list **stack_a, t_list **stack_b, int n)
-{
-	int	max_rank;
-	int	*c_sizes;
-	int	c_count;
-	int	i;
-
-	assign_ranks(stack_a, n);
-	c_count = ft_sqrt(n);
-	c_sizes = find_chunk_sizes(n, c_count);
-	i = 0;
-	while (i < c_count)
-		max_rank = pb_chunk(stack_a, stack_b, c_sizes[i++], n);
-	while (i--)
-		extract_chunk(stack_a, stack_b, c_sizes[i], &max_rank);
-	free(c_sizes);
+	dis = calculate_disorder(stack_a);
+	if (dis < 0.2)
+		simple_sort(stack_a, stack_b);
+	if (dis > 0.2 && dis < 0.5)
+		medium_sort(stack_a, stack_b, n);
+	if (dis > 0.5)
+		ft_printf_fd(1, "Place complex sort here\n");
 }
 
 // int main(void)
@@ -164,7 +100,43 @@ void	medium_sort(t_list **stack_a, t_list **stack_b, int n)
 // 	lst_a16->value = 11;
 // 	lst_a17->value = 48;
 // 	lst_a18->value = 0;
-// 	ft_print_stacks(1, &lst_a1, &lst_b1);
-// 	medium_sort(&lst_a1, &lst_b1, 18);
-// 	ft_print_stacks(1, &lst_a1, &lst_b1);
+//
+// 	// lst_a1->value = 17;
+// 	// lst_a2->value = 16;
+// 	// lst_a3->value = 15;
+// 	// lst_a4->value = 14;
+// 	// lst_a5->value = 13;
+// 	// lst_a6->value = 12;
+// 	// lst_a7->value = 11;
+// 	// lst_a8->value = 10;
+// 	// lst_a9->value = 9;
+// 	// lst_a10->value = 6;
+// 	// lst_a11->value = 7;
+// 	// lst_a12->value = 8;
+// 	// lst_a13->value = 5;
+// 	// lst_a14->value = 4;
+// 	// lst_a15->value = 3;
+// 	// lst_a16->value = 2;
+// 	// lst_a17->value = 1;
+// 	// lst_a18->value = 0;
+//
+// 	// lst_a1->value = 3;
+// 	// lst_a2->value = 1;
+// 	// lst_a3->value = 2;
+// 	// lst_a4->value = 0;
+// 	// lst_a5->value = 4;
+// 	// lst_a6->value = 5;
+// 	// lst_a7->value = 6;
+// 	// lst_a8->value = 7;
+// 	// lst_a9->value = 8;
+// 	// lst_a10->value = 9;
+// 	// lst_a11->value = 10;
+// 	// lst_a12->value = 11;
+// 	// lst_a13->value = 12;
+// 	// lst_a14->value = 13;
+// 	// lst_a15->value = 14;
+// 	// lst_a16->value = 15;
+// 	// lst_a17->value = 16;
+// 	// lst_a18->value = 17;
+// 	adaptive_sort(&lst_a1, &lst_b1, 18);
 // }
