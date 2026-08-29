@@ -6,11 +6,23 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 17:47:14 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 19:52:05 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/29 14:05:25 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void	ft_putfloat(double f, int *cc, int fd, int fp)
+{
+	double	fract;
+
+	fract = f - (int)f;
+	while (fp--)
+		fract *= 10;
+	ft_putnbr((int)f, cc, fd);
+	ft_putchar('.', cc, fd);
+	ft_putnbr((int)fract, cc, fd);
+}
 
 static void	ft_handle_pointer(int *cc, va_list args, int fd)
 {
@@ -36,6 +48,8 @@ static void	ft_parseconv(char cnv, int fd, int *cc, va_list args)
 		ft_putnbr(va_arg(args, int), cc, fd);
 	if (cnv == 'u')
 		ft_putnbr_unsigned(va_arg(args, unsigned int), cc, fd);
+	if (cnv == 'f')
+		ft_putfloat(va_arg(args, double), cc, fd, 2);
 	if (cnv == 's')
 		ft_putstr(va_arg(args, char *), cc, fd);
 	if (cnv == 'x')
@@ -46,28 +60,6 @@ static void	ft_parseconv(char cnv, int fd, int *cc, va_list args)
 		ft_handle_pointer(cc, args, fd);
 }
 
-// int	ft_printf(const char *format, ...)
-// {
-// 	va_list	args;
-// 	int		i;
-// 	int		cc;
-
-// 	va_start(args, format);
-// 	i = 0;
-// 	cc = 0;
-// 	while (format[i])
-// 	{
-// 		if (format[i] == '%' && format[i + 1])
-// 		{
-// 			ft_parseconv(format[++i], &cc, args);
-// 			i++;
-// 		}
-// 		else
-// 			ft_putchar(format[i++], &cc);
-// 	}
-// 	va_end(args);
-// 	return (cc);
-// }
 int	ft_printf_fd(int fd, const char *format, ...)
 {
 	va_list	args;
@@ -90,6 +82,7 @@ int	ft_printf_fd(int fd, const char *format, ...)
 	va_end(args);
 	return (cc);
 }
+
 // #include <stdio.h>
 // #include <limits.h>
 //
