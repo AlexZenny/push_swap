@@ -83,6 +83,7 @@ int		ft_mode_status(t_options *options, t_mode mode);
 int		ft_flags(const char *cursor, t_options *options);
 int		input_parser(int argc, char *argv[], t_options *options);
 float	calculate_disorder(t_list **stack);
+int		count_stack_members(t_list **stack);
 
 void	adaptive_sort(t_list **stack_a, t_list **stack_b, int n);
 void	simple_sort(t_list **stack_a, t_list **stack_b);
