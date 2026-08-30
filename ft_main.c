@@ -72,8 +72,18 @@ int input_parser(int argc, char *argv[], t_options *options)
     } 
     return(0);
 }
+
+void	set_data(t_data data);
+{
+	data.sort_mode = ADAPTIVE;
+	data.stack_a = NULL;
+	data.stack_b = NULL;
+	data.bench_mode = false;
+}
+
 int main(int argc, char* argv[])
 {
+	t_data		data;
     t_options   options;
     int           status;
     t_list       *stack_a;

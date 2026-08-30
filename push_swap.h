@@ -58,6 +58,16 @@ typedef struct s_ops_counters
 	int total_count;
 }			t_ops_counters;
 
+typedef struct s_data
+{
+	t_mode			sort_mode;
+	t_list			*stack_a;
+	t_list			*stack_b;
+	t_ops_counters	ops;
+	float			disorder;
+	bool			bench_mode;
+}					t_data;
+
 int		pa(t_list **stack_a, t_list **stack_b);
 int		pb(t_list **stack_a, t_list **stack_b);
 int		sa(t_list **stack_a);

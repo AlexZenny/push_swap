@@ -31,6 +31,7 @@ int	sa(t_list **stack_a)
 	if ((!(*stack_a)) || (!(*stack_a)->next))
 		return (0);
 	swap(stack_a);
+	ft_printf_fd(1, "sa\n");
 	return (1); 
 }
 
@@ -39,6 +40,7 @@ int	sb(t_list **stack_b)
 	if ((!(*stack_b)) || (!(*stack_b)->next))
 		return (0);
 	swap(stack_b);
+	ft_printf_fd(1, "sb\n");
 	return (1); 
 }
 
@@ -49,6 +51,7 @@ int	ss(t_list **stack_a, t_list **stack_b)
 		return (0);
 	swap(stack_a);
 	swap(stack_b);
+	ft_printf_fd(1, "ss\n");
 	return (1);
 }
 
