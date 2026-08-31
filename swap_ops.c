@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:33:55 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/23 22:42:51 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/31 16:09:01 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	sa(t_data *data)
 		return (0);
 	swap(&data->stack_a);
 	data->ops.sa_count++;
+	data->ops.total_count++;
 	ft_printf_fd(1, "sa\n");
-	return (1); 
+	return (1);
 }
 
 int	sb(t_data *data)
@@ -42,18 +43,20 @@ int	sb(t_data *data)
 		return (0);
 	swap(&data->stack_b);
 	data->ops.sb_count++;
+	data->ops.total_count++;
 	ft_printf_fd(1, "sb\n");
-	return (1); 
+	return (1);
 }
 
 int	ss(t_data *data)
 {
-	if ((!data->stack_a) || (!data->stack_a->next)
-		|| (!data->stack_b) || (!data->stack_b->next))
+	if ((!data->stack_a) || (!data->stack_a->next) || (!data->stack_b)
+		|| (!data->stack_b->next))
 		return (0);
 	swap(&data->stack_a);
 	swap(&data->stack_b);
 	data->ops.ss_count++;
+	data->ops.total_count++;
 	ft_printf_fd(1, "ss\n");
 	return (1);
 }

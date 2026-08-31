@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/30 13:58:59 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/31 16:18:44 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// void	run_sort(t_list **stack_a, t_list **stack_b, t_options *options)
-// {
-// 	float	disorder;
-//
-// 	disorder = calculate_disorder(stack_a);
-// 	if (options->mode == SIMPLE)
-// 		simple_sort(&stack_a, &stack_b);
-// 	if else (options->mode == MEDIUM)
-// 		medium_sort(&stack_a, &stack_b, stack_len(*stack_a));
-// 	if else (options->mode == COMPLEX)
-// 		complex_sort(&stack_a, &stack_b);
-// 	else
-// 		adaptive_sort(&stack_a, &stack_b, disorder);
-// }
 
 int	ft_mode_status(t_options *options, t_mode mode)
 {
@@ -64,7 +49,7 @@ int	input_parser(int argc, char *argv[], t_options *options)
 	while (i < argc)
 	{
 		cursor = argv[i];
-		if (cursor[0] == '-' && cursor[1] == '-' )
+		if (cursor[0] == '-' && cursor[1] == '-')
 		{
 			if (ft_flags(cursor, options) == 1)
 				return (1);
@@ -74,15 +59,6 @@ int	input_parser(int argc, char *argv[], t_options *options)
 		i++;
 	}
 	return (0);
-}
-
-void	initialize_data(t_data *data)
-{
-	data->options.mode = ADAPTIVE;
-	data->options.mode_status = 0;
-	data->options.bench = false;
-	data->stack_a = NULL;
-	data->stack_b = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -103,37 +79,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	disorder = calculate_disorder(&data.stack_a);
+	initialize_counters(&data);
 	select_sort(&data, disorder);
 	if (data.options.bench == true)
 		benchmark_mode(&data, disorder);
+	//ft_print_stacks(1, &data.stack_a, &data.stack_b);
+	ft_deallocate(&data.stack_b);
+	return (0);
 }
-
-// int main(int argc, char* argv[])
-// {
-//     t_options   options;
-//     int           status;
-//     t_list       *stack_a;
-//     t_list       *stack_b;
-//     
-//     options.mode = ADAPTIVE;
-//     options.mode_status = 0;
-//     options.bench = false;
-//     stack_a = NULL;
-//     stack_b = NULL;
-//     
-//     status = input_parser(argc, argv, &options);
-//     if (status == 1)
-//         printf("Error\n");
-//     else if (status == 0)
-//     {
-//         status = ft_create_stack(argc, argv, &stack_a);
-//         if (status == 1)
-//         {
-//             printf("Error\n");
-//             ft_deallocate(&stack_a);
-//             return(1);
-//         }
-//     }
-//     simple_sorting(&stack_a, &stack_b);
-//     ft_print_stacks(2, &stack_a, &stack_b);
-// }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex_sort.c                                     :+:      :+:    :+:   */
+/*   complex_sorting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 13:02:38 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/30 17:38:31 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/08/31 15:59:41 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ int	count_bits(int max_rank)
 	}
 	return (count_bits);
 }
+
 int	find_largest_rank(t_list *stack_a)
 {
 	t_list	*current;
 	t_list	*head;
 	t_list	*max_rank_node;
-	int		position;
 	int		max_rank;
 
-	max_rank = 0;
-	position = 1;
+	max_rank = 1;
 	if (stack_a == NULL)
 		return (-1);
 	head = stack_a;
@@ -50,30 +49,38 @@ int	find_largest_rank(t_list *stack_a)
 	return (max_rank);
 }
 
-void	complex_sort(t_list **stack_a, t_list **stack_b)
+static void	radix_pass(t_data *data, int size, int bit_position)
 {
-	int	bit_position;
 	int	i;
 	int	rank_value;
+
+	i = 0;
+	while (i < size)
+	{
+		rank_value = data->stack_a->rank;
+		if (((rank_value >> bit_position) & 1) == 0)
+			pb(data);
+		else if (((rank_value >> bit_position) & 1) == 1)
+			ra(data);
+		i++;
+	}
+}
+
+void	complex_sort(t_data *data)
+{
+	int	max_bits;
 	int	size;
+	int	bit_position;
 
 	bit_position = 0;
-	i = 0;
-	assign_ranks(stack_a, stack_len(*stack_a));
-	size = (find_largest_rank(*stack_a) + 1);
-	while (bit_position != (count_bits - 1))
+	size = stack_len(data->stack_a);
+	assign_ranks(&data->stack_a, size);
+	max_bits = count_bits(find_largest_rank(data->stack_a));
+	while (bit_position != max_bits)
 	{
-		rank_value = (*stack_a)->rank;
-		while (i <= size)
-		{
-			if (((rank_value >> bit_position) & 1) == 0)
-				pb(stack_a, stack_b);
-			else if (((rank_value >> bit_position) & 1) == 1)
-				ra(stack_a);
-			i++;
-		}
-		while (stack_b != NULL)
-			pa(stack_a, stack_b);
+		radix_pass(data, size, bit_position);
+		while (data->stack_b != NULL)
+			pa(data);
 		bit_position++;
 	}
 }

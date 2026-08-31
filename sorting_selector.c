@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_selector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 23:42:09 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/31 02:24:17 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/08/31 16:08:40 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	select_sort(t_data *data, float dis)
 		if (dis > 0.2 && dis < 0.5)
 			medium_sort(data, n);
 		if (dis > 0.5)
-			ft_printf_fd(1, "Place complex sort here\n");
+			complex_sort(data);
 		return ;
 	}
 	if (*mode == SIMPLE)
@@ -34,5 +34,5 @@ void	select_sort(t_data *data, float dis)
 	if (*mode == MEDIUM)
 		medium_sort(data, n);
 	if (*mode == COMPLEX)
-		ft_printf_fd(1, "Place complex sort here\n");
+		complex_sort(data);
 }

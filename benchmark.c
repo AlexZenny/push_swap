@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   benchmark.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 19:32:35 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/28 22:11:33 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/31 16:26:45 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	benchmark_mode(t_data *data, float dis)
 	t_mode	*mode;
 
 	mode = &data->options.mode;
-	ft_printf_fd(2, "[bench] disorder:	%fd%%\n", dis);
+	ft_printf_fd(2, "[bench] disorder:	%f%%\n", dis * 100);
 	ft_printf_fd(2, "[bench] strategy:	");
 	if (*mode == SIMPLE)
 		ft_printf_fd(2, "Simple / O(n^2)\n");
@@ -42,9 +42,10 @@ void	benchmark_mode(t_data *data, float dis)
 	}
 	ft_printf_fd(2, "[bench] total_ops:	%d\n", data->ops.total_count);
 	ft_printf_fd(2, "[bench] sa:	%d	sb:	%d	ss:	%d	pa:	%d	pb:	%d\n",
-			data->ops.sa_count, data->ops.sb_count, data->ops.ss_count,
-			data->ops.pa_count, data->ops.pb_count);
+		data->ops.sa_count, data->ops.sb_count, data->ops.ss_count,
+		data->ops.pa_count, data->ops.pb_count);
+
 	ft_printf_fd(2, "[bench] ra:	%d	rb:	%d	rr:	%d	rra:	%d	rrb:	%d	rrr:	%d\n",
-			data->ops.ra_count, data->ops.rb_count, data->ops.rr_count,
-			data->ops.rra_count, data->ops.rrb_count, data->ops.rrr_count);
+		data->ops.ra_count, data->ops.rb_count, data->ops.rr_count,
+		data->ops.rra_count, data->ops.rrb_count, data->ops.rrr_count);
 }

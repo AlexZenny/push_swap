@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:33:50 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 23:28:41 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/31 14:50:10 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	push(t_list **stack_from, t_list **stack_to)
 	t_list	*temp;
 
 	temp = *stack_from;
-	detach_lst(stack_from, temp);	
+	detach_lst(stack_from, temp);
 	if (*stack_to)
 	{
 		temp->next = *stack_to;
@@ -49,9 +49,10 @@ int	pa(t_data *data)
 {
 	if (!data)
 		return (0);
-	push(&data->stack_b, &data->stack_a);	
+	push(&data->stack_b, &data->stack_a);
 	ft_printf_fd(1, "pa\n");
 	data->ops.pa_count++;
+	data->ops.total_count++;
 	return (1);
 }
 
@@ -62,5 +63,6 @@ int	pb(t_data *data)
 	push(&data->stack_a, &data->stack_b);
 	ft_printf_fd(1, "pb\n");
 	data->ops.pb_count++;
+	data->ops.total_count++;
 	return (1);
 }

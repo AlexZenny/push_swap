@@ -3,7 +3,6 @@ CFILES = ft_listsconv.c\
 	rev_rotate_ops.c\
 	swap_ops.c\
 	push_ops.c\
-	error_handle.c\
 	ft_main.c\
 	disorder.c\
 	benchmark.c\
@@ -11,11 +10,11 @@ CFILES = ft_listsconv.c\
 	simple_sorting.c\
 	medium_sorting.c\
 	medium_sorting_utils.c\
-	complex_sort.c\
-	ft_debug_stacks.c\
+	complex_sorting.c\
 	ft_printf/ft_printf.c\
 	ft_printf/ft_extras.c\
-	general_utils.c
+	general_utils.c\
+	init.c
 
 OBJ_DIR = obj
 

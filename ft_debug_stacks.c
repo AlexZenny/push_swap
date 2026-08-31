@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_debug_stacks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 17:45:27 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 20:03:31 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/31 16:12:15 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+// #include "push_swap.h"
 
-static void	ft_print_stack(int fd, t_list **stack)
-{
-    t_list *temp;
+// static void	ft_print_stack(int fd, t_list **stack)
+// {
+//     t_list *temp;
 
-    temp = (*stack);
-    if (!(*stack))
-    {
-        ft_printf_fd(fd,"NULL\n");
-        return ;
-    }
-    ft_printf_fd(fd, "[ ");
-	ft_printf_fd(fd, "%d ", temp->value);
-	temp = temp->next;
-	while (temp != (*stack))
-    {
-        ft_printf_fd(fd, "%d ", temp->value);
-		temp = temp->next;
-    }
-	ft_printf_fd(fd, "]\n");
-}
+//     temp = (*stack);
+//     if (!(*stack))
+//     {
+//         ft_printf_fd(fd,"NULL\n");
+//         return ;
+//     }
+//     ft_printf_fd(fd, "[ ");
+// 	ft_printf_fd(fd, "%d ", temp->value);
+// 	temp = temp->next;
+// 	while (temp != (*stack))
+//     {
+//         ft_printf_fd(fd, "%d ", temp->value);
+// 		temp = temp->next;
+//     }
+// 	ft_printf_fd(fd, "]\n");
+// }
 
-void	ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b)
-{
-    ft_printf_fd(fd, "stack_a: ");
-    ft_print_stack(fd, stack_a);
-    ft_printf_fd(fd, "stack_b: ");
-    ft_print_stack(fd, stack_b);
-}
+// void	ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b)
+// {
+//     ft_printf_fd(fd, "stack_a: ");
+//     ft_print_stack(fd, stack_a);
+//     ft_printf_fd(fd, "stack_b: ");
+//     ft_print_stack(fd, stack_b);
+// }
 
 // int	main(void)
 // {
