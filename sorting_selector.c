@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 23:42:09 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/31 16:08:40 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/08/31 16:58:14 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	select_sort(t_data *data, float dis)
 	{
 		if (dis < 0.2)
 			simple_sort(data);
-		if (dis > 0.2 && dis < 0.5)
+		if (dis > 0.2 && dis <= 0.5)
 			medium_sort(data, n);
 		if (dis > 0.5)
 			complex_sort(data);

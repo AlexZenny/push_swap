@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:43:26 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/31 16:07:42 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/08/31 16:45:58 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	simple_sort(t_data *data)
 	min_position = 0;
 	if (data->stack_a == NULL)
 		return ;
-	if (is_sorted(data->stack_a) == true)
+	if (is_sorted(data->stack_a))
 		return ;
 	while (data->stack_a != NULL)
 	{
