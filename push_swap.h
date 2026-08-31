@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/28 21:46:53 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/08/31 03:58:53 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_ops_counters
 	int sb_count;
 	int ss_count;
 	int pa_count;
+	int pb_count;
 	int ra_count;
 	int rb_count;
 	int rr_count;
@@ -60,27 +61,25 @@ typedef struct s_ops_counters
 
 typedef struct s_data
 {
-	t_mode			sort_mode;
+	t_options		options;
 	t_list			*stack_a;
 	t_list			*stack_b;
 	t_ops_counters	ops;
-	float			disorder;
-	bool			bench_mode;
 }					t_data;
 
-int		pa(t_list **stack_a, t_list **stack_b);
-int		pb(t_list **stack_a, t_list **stack_b);
-int		sa(t_list **stack_a);
-int		sb(t_list **stack_b);
-int		ss(t_list **stack_a, t_list **stack_b);
+int		pa(t_data *data);
+int		pb(t_data *data);
+int		sa(t_data *data);
+int		sb(t_data *data);
+int		ss(t_data *data);
 void	ft_rotate(t_list **stack);
-int		ra(t_list **stack_a);
-int		rb(t_list **stack_a);
-int		rr(t_list **stack_a, t_list **stack_b);
+int		ra(t_data *data);
+int		rb(t_data *data);
+int		rr(t_data *data);
 void	ft_rev_rotate(t_list **stack);
-int		rra(t_list **stack_a);
-int		rrb(t_list **stack_b);
-int		rrr(t_list **stack_a, t_list **stack_b);
+int		rra(t_data *data);
+int		rrb(t_data *data);
+int		rrr(t_data *data);
 void	ft_addback(t_list **stack_a, int i);
 void	ft_deallocate(t_list **stack_a);
 int		ft_strncmp (const char *s1, const char *s2, size_t size);
@@ -95,15 +94,16 @@ int		input_parser(int argc, char *argv[], t_options *options);
 float	calculate_disorder(t_list **stack);
 int		count_stack_members(t_list **stack);
 
-void	adaptive_sort(t_list **stack_a, t_list **stack_b, int n);
-void	simple_sort(t_list **stack_a, t_list **stack_b);
-void	medium_sort(t_list **stack_a, t_list **stack_b, int n);
+void	select_sort(t_data *data, float disorder);
+void	simple_sort(t_data *data);
+void	medium_sort(t_data *data, int n);
 bool	is_sorted(t_list *stack_a);
 int		find_min_position(t_list *stack_a);
-int		rotation(t_list **stack_a, int min_position);
+int		rotation(t_data *data, int min_position);
 int		stack_len(t_list *stack_a);
 void	assign_ranks(t_list **stack_a, int n);
 int		find_shortest_path(t_list **stack, int target_rank);
+void	benchmark_mode(t_data *data, float dis);
 
 void	ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b);
 #endif

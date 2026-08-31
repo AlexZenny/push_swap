@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-void	run_sort(t_list **stack_a, t_list **stack_b, t_options *options)
-{
-	float	disorder;
-
-	disorder = calculate_disorder(stack_a);
-	if (options.mode == SIMPLE)
-		simple_sort(&stack_a, &stack_b);
-	if else (options.mode == MEDIUM)
-		medium_sort(&stack_a, &stack_b, stack_len(*stack_a));
-	if else (options.mode == COMPLEX)
-		complex_sort(&stack_a, &stack_b);
-	else
-		adaptive_sort(&stack_a, &stack_b, disorder);
-}
+// void	run_sort(t_list **stack_a, t_list **stack_b, t_options *options)
+// {
+// 	float	disorder;
+//
+// 	disorder = calculate_disorder(stack_a);
+// 	if (options->mode == SIMPLE)
+// 		simple_sort(&stack_a, &stack_b);
+// 	if else (options->mode == MEDIUM)
+// 		medium_sort(&stack_a, &stack_b, stack_len(*stack_a));
+// 	if else (options->mode == COMPLEX)
+// 		complex_sort(&stack_a, &stack_b);
+// 	else
+// 		adaptive_sort(&stack_a, &stack_b, disorder);
+// }
 
 int	ft_mode_status(t_options *options, t_mode mode)
 {
@@ -42,9 +42,11 @@ int	ft_flags(const char *cursor, t_options *options)
 		return (ft_mode_status(options, SIMPLE));
 	else if ((ft_strncmp(cursor, "--medium", 9) == 0))
 		options->mode = MEDIUM;
-	else if ((ft_strncmp(cursor, "--complex", 10) == 0) && (options->mode_status == 0))
+	else if ((ft_strncmp(cursor, "--complex", 10) == 0)
+		&& (options->mode_status == 0))
 		options->mode = COMPLEX;
-	else if ((ft_strncmp(cursor, "--adaptive", 11) == 0) && (options->mode_status == 0))
+	else if ((ft_strncmp(cursor, "--adaptive", 11) == 0)
+		&& (options->mode_status == 0))
 		options->mode = ADAPTIVE;
 	else if (ft_strncmp(cursor, "--bench", 8) == 0)
 		options->bench = true;
@@ -74,20 +76,36 @@ int	input_parser(int argc, char *argv[], t_options *options)
 	return (0);
 }
 
-void	set_data(t_data data)
+void	initialize_data(t_data *data)
 {
-	data.sort_mode = ADAPTIVE;
-	data.stack_a = NULL;
-	data.stack_b = NULL;
-	data.bench_mode = false;
+	data->options.mode = ADAPTIVE;
+	data->options.mode_status = 0;
+	data->options.bench = false;
+	data->stack_a = NULL;
+	data->stack_b = NULL;
 }
 
-int	main(int argc, int **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
-	bool	status;
+	float	disorder;
 
-	data = malloc(sizeof(t_data));
+	initialize_data(&data);
+	if (input_parser(argc, argv, &data.options))
+	{
+		ft_printf_fd(2, "Error\n");
+		return (1);
+	}
+	if (ft_create_stack(argc, argv, &data.stack_a))
+	{
+		ft_printf_fd(2, "Error\n");
+		ft_deallocate(&data.stack_a);
+		return (1);
+	}
+	disorder = calculate_disorder(&data.stack_a);
+	select_sort(&data, disorder);
+	if (data.options.bench == true)
+		benchmark_mode(&data, disorder);
 }
 
 // int main(int argc, char* argv[])

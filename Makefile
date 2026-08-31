@@ -1,15 +1,21 @@
 CFILES = ft_listsconv.c\
 	rotate_ops.c\
 	rev_rotate_ops.c\
-	swap.c\
-	push.c\
-	libft.c\
+	swap_ops.c\
+	push_ops.c\
+	error_handle.c\
 	ft_main.c\
 	disorder.c\
+	benchmark.c\
+	sorting_selector.c\
 	simple_sorting.c\
+	medium_sorting.c\
+	medium_sorting_utils.c\
+	complex_sort.c\
 	ft_debug_stacks.c\
 	ft_printf/ft_printf.c\
-	ft_printf/ft_extras.c
+	ft_printf/ft_extras.c\
+	general_utils.c
 
 OBJ_DIR = obj
 

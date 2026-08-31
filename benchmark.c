@@ -22,26 +22,29 @@ void	print_complexity(float dis)
 		ft_printf_fd(2, "O(n log n)\n");
 }
 
-void	benchmark_mode(float dis, t_mode sort, t_ops_counters ops)
+void	benchmark_mode(t_data *data, float dis)
 {
+	t_mode	*mode;
+
+	mode = &data->options.mode;
 	ft_printf_fd(2, "[bench] disorder:	%fd%%\n", dis);
 	ft_printf_fd(2, "[bench] strategy:	");
-	if (sort == SIMPLE)
+	if (*mode == SIMPLE)
 		ft_printf_fd(2, "Simple / O(n^2)\n");
-	else if (sort == MEDIUM)
+	else if (*mode == MEDIUM)
 		ft_printf_fd(2, "Medium / O(n√n)\n");
-	else if (sort == COMPLEX)
+	else if (*mode == COMPLEX)
 		ft_printf_fd(2, "Complex / O(n log n)\n");
 	else
 	{
 		ft_printf_fd(2, "Adaptive / ");
 		print_complexity(dis);
 	}
-	ft_printf_fd(2, "[bench] total_ops:	%d\n", ops.total_ops);
+	ft_printf_fd(2, "[bench] total_ops:	%d\n", data->ops.total_count);
 	ft_printf_fd(2, "[bench] sa:	%d	sb:	%d	ss:	%d	pa:	%d	pb:	%d\n",
-			ops.sa_count, ops.sb_count, ops.ss_count,
-			ops.pa_count, ops.pb_count);
+			data->ops.sa_count, data->ops.sb_count, data->ops.ss_count,
+			data->ops.pa_count, data->ops.pb_count);
 	ft_printf_fd(2, "[bench] ra:	%d	rb:	%d	rr:	%d	rra:	%d	rrb:	%d	rrr:	%d\n",
-			ops.ra_count, ops.rb_count, ops.rr_count,
-			ops.rra_count, ops.rrb_count, ops.rrr_count);
+			data->ops.ra_count, data->ops.rb_count, data->ops.rr_count,
+			data->ops.rra_count, data->ops.rrb_count, data->ops.rrr_count);
 }

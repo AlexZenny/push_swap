@@ -18,28 +18,31 @@ void	ft_rev_rotate(t_list **stack)
 		return ;
 	*stack = (*stack)->prev;
 }
-int	rra(t_list **stack_a)
+int	rra(t_data *data)
 {
-	if ((!(*stack_a)) || (!(*stack_a)->next))
+	if ((!data->stack_a) || (!data->stack_a->next))
 		return (0);
-	ft_rev_rotate(stack_a);
+	ft_rev_rotate(&data->stack_a);
+	data->ops.rra_count++;
 	ft_printf_fd(1, "rra\n");
 	return (1); 
 }
-int	rrb(t_list **stack_b)
+int	rrb(t_data *data)
 {
-	if ((!(*stack_b)) || (!(*stack_b)->next))
+	if ((!data->stack_b) || (!data->stack_b->next))
 		return (0);
-	ft_rev_rotate(stack_b);
+	ft_rev_rotate(&data->stack_b);
+	data->ops.rrb_count++;
 	ft_printf_fd(1, "rrb\n");
 	return (1); 
 }
-int	rrr(t_list **stack_a, t_list **stack_b)
+int	rrr(t_data *data)
 {
-	if (stack_a == NULL || *stack_a == NULL || 
-		stack_b == NULL || *stack_b == NULL)
+	if ((!data->stack_a) || (!data->stack_b))
 		return (0);
-	ft_rev_rotate(stack_a);
-	ft_rev_rotate(stack_b);
+	ft_rev_rotate(&data->stack_a);
+	ft_rev_rotate(&data->stack_b);
+	data->ops.rrr_count++;
+	ft_printf_fd(1, "rrr\n");
 	return (1);
 }

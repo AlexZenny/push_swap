@@ -31,25 +31,25 @@ int stack_len(t_list *stack_a)
         }
     return(len);
 } 
-int rotation(t_list **stack_a, int min_position)
+int rotation(t_data *data, int min_position)
 {
     int i;
     int len;
 
     i = 0;
-    if (stack_a == NULL || *stack_a == NULL)
+    if (data->stack_a == NULL)
         return(-1);
-    len = stack_len(*stack_a);
+    len = stack_len(data->stack_a);
     if (min_position <= len / 2)
         while (i != min_position)
         {
-           ra(stack_a);
+           ra(data);
            i++; 
         }
     else 
         while(i < len - min_position)
         {
-            rra(stack_a);
+            rra(data);
             i++; 
         }
     return(i);
@@ -102,22 +102,21 @@ bool is_sorted(t_list *stack_a)
     }
     return(true);
 }
-void simple_sort(t_list **stack_a, t_list **stack_b)
+void simple_sort(t_data *data)
 {
 int min_position;
 
 min_position = 0;
-if (stack_a == NULL || *stack_a == NULL)
+if (data->stack_a == NULL)
     return ;
-if (is_sorted(*stack_a) == true)
+if (is_sorted(data->stack_a) == true)
     return ;
-while (*stack_a != NULL)
+while (data->stack_a != NULL)
 {
-    min_position = find_min_position(*stack_a);
-    rotation(stack_a, min_position);
-    pb(stack_a, stack_b); 
+    min_position = find_min_position(data->stack_a);
+    rotation(data, min_position);
+    pb(data); 
 }
-while (*stack_b != NULL)
-    pa(stack_a, stack_b);
-
+while (data->stack_b != NULL)
+    pa(data);
 }

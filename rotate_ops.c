@@ -19,29 +19,31 @@ void	ft_rotate(t_list **stack)
 		return ;
 	*stack = (*stack)->next;
 }
-int	ra(t_list **stack_a)
+int	ra(t_data *data)
 {
-	if ((!(*stack_a)) || (!(*stack_a)->next))
+	if ((!data->stack_a) || (!data->stack_a->next))
 		return (0);
-	ft_rotate(stack_a);
+	ft_rotate(&data->stack_a);
+	data->ops.ra_count++;
 	ft_printf_fd(1, "ra\n");
 	return (1); 
 }
-int	rb(t_list **stack_b)
+int	rb(t_data *data)
 {
-	if ((!(*stack_b)) || (!(*stack_b)->next))
+	if ((!data->stack_b) || (!data->stack_b->next))
 		return (0);
-	ft_rotate(stack_b);
+	ft_rotate(&data->stack_b);
+	data->ops.rb_count++;
 	ft_printf_fd(1, "rb\n");
 	return (1); 
 }
-int	rr(t_list **stack_a, t_list **stack_b)
+int	rr(t_data *data)
 {
-	if (stack_a == NULL || *stack_a == NULL || 
-		stack_b == NULL || *stack_b == NULL)
+	if ((!data->stack_a) || (!data->stack_b))
 		return (0);
-	ft_rotate(stack_a);
-	ft_rotate(stack_b);
+	ft_rotate(&data->stack_a);
+	ft_rotate(&data->stack_b);
+	data->ops.rr_count++;
 	ft_printf_fd(1, "rr\n");
 	return (1);
 }

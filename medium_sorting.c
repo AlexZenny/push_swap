@@ -33,59 +33,59 @@ int	*find_chunk_sizes(int n, int c_count)
 	return (c_sizes);
 }
 
-int	pb_chunk(t_list **st_a, t_list **st_b, int c_size, int n)
+int	pb_chunk(t_data *data, int c_size, int n)
 {
 	static int	max_rank = -1;
 
 	max_rank += c_size;
 	while (n-- && c_size)
 	{
-		if ((*st_a)->rank <= max_rank)
+		if (data->stack_a->rank <= max_rank)
 		{
-			pb(st_a, st_b);
+			pb(data);
 			c_size--;
 		}
 		else
-			ra(st_a);
+			ra(data);
 	}
 	return (max_rank);
 }
 
-void	extract_chunk(t_list **st_a, t_list **st_b, int c_size, int *max_rank)
+void	extract_chunk(t_data *data, int c_size, int *max_rank)
 {
 	int		dir;
 
 	while (c_size > 0)
 	{
-		dir = find_shortest_path(st_b, *max_rank);
-		while ((*st_b)->rank != (*max_rank))
+		dir = find_shortest_path(&data->stack_b, *max_rank);
+		while (data->stack_b->rank != (*max_rank))
 		{
 			if (dir >= 0)
-				rb(st_b);
+				rb(data);
 			else
-				rrb(st_b);
+				rrb(data);
 		}
-		pa(st_a, st_b);
+		pa(data);
 		(*max_rank)--;
 		c_size--;
 	}
 }
 
-void	medium_sort(t_list **stack_a, t_list **stack_b, int n)
+void	medium_sort(t_data *data, int n)
 {
 	int	max_rank;
 	int	*c_sizes;
 	int	c_count;
 	int	i;
 
-	assign_ranks(stack_a, n);
+	assign_ranks(&data->stack_a, n);
 	c_count = ft_sqrt(n);
 	c_sizes = find_chunk_sizes(n, c_count);
 	i = 0;
 	while (i < c_count)
-		max_rank = pb_chunk(stack_a, stack_b, c_sizes[i++], n);
+		max_rank = pb_chunk(data, c_sizes[i++], n);
 	while (i--)
-		extract_chunk(stack_a, stack_b, c_sizes[i], &max_rank);
+		extract_chunk(data, c_sizes[i], &max_rank);
 	free(c_sizes);
 }
 
