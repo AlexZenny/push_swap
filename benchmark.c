@@ -44,8 +44,8 @@ void	benchmark_mode(t_data *data, float dis)
 	ft_printf_fd(2, "[bench] sa:	%d	sb:	%d	ss:	%d	pa:	%d	pb:	%d\n",
 		data->ops.sa_count, data->ops.sb_count, data->ops.ss_count,
 		data->ops.pa_count, data->ops.pb_count);
-
-	ft_printf_fd(2, "[bench] ra:	%d	rb:	%d	rr:	%d	rra:	%d	rrb:	%d	rrr:	%d\n",
+	ft_printf_fd(2, "[bench] ra:	%d	rb:	%d	rr:	%d	"
+		"rra:	%d	rrb:	%d	rrr:	%d\n",
 		data->ops.ra_count, data->ops.rb_count, data->ops.rr_count,
 		data->ops.rra_count, data->ops.rrb_count, data->ops.rrr_count);
 }

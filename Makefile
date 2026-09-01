@@ -7,6 +7,7 @@ CFILES = ft_listsconv.c\
 	disorder.c\
 	benchmark.c\
 	sorting_selector.c\
+	tiny_sorting.c\
 	simple_sorting.c\
 	medium_sorting.c\
 	medium_sorting_utils.c\

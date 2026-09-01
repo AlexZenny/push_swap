@@ -21,18 +21,20 @@ void	select_sort(t_data *data, float dis)
 	n = count_stack_members(&data->stack_a);
 	if (*mode == ADAPTIVE)
 	{
-		if (dis < 0.2)
+		if (n <= 5)
+			tiny_sort(data, n);
+		else if (dis < 0.2)
 			simple_sort(data);
-		if (dis > 0.2 && dis <= 0.5)
+		else if (dis > 0.2 && dis <= 0.5)
 			medium_sort(data, n);
-		if (dis > 0.5)
+		else
 			complex_sort(data);
 		return ;
 	}
-	if (*mode == SIMPLE)
+	else if (*mode == SIMPLE)
 		simple_sort(data);
-	if (*mode == MEDIUM)
+	else if (*mode == MEDIUM)
 		medium_sort(data, n);
-	if (*mode == COMPLEX)
+	else
 		complex_sort(data);
 }

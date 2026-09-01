@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/31 16:18:44 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/01 01:17:41 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	main(int argc, char **argv)
 	select_sort(&data, disorder);
 	if (data.options.bench == true)
 		benchmark_mode(&data, disorder);
-	//ft_print_stacks(1, &data.stack_a, &data.stack_b);
 	ft_deallocate(&data.stack_b);
 	return (0);
 }

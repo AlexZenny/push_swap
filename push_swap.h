@@ -97,6 +97,7 @@ float				calculate_disorder(t_list **stack);
 int					count_stack_members(t_list **stack);
 
 void				select_sort(t_data *data, float disorder);
+void				tiny_sort(t_data *data, int n);
 void				simple_sort(t_data *data);
 void				medium_sort(t_data *data, int n);
 void				complex_sort(t_data *data);
