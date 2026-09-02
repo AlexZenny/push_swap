@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/31 16:17:24 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/02 11:03:01 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ int					find_shortest_path(t_list **stack, int target_rank);
 int					find_largest_rank(t_list *stack_a);
 int					count_bits(int max_rank);
 void				benchmark_mode(t_data *data, float dis);
-
+char				**ft_split(char const *s, char c);
 void				ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b);
 #endif

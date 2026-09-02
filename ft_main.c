@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/09/01 01:17:41 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/02 12:17:38 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,58 @@ int	ft_flags(const char *cursor, t_options *options)
 	if ((ft_strncmp(cursor, "--simple", 9) == 0))
 		return (ft_mode_status(options, SIMPLE));
 	else if ((ft_strncmp(cursor, "--medium", 9) == 0))
-		options->mode = MEDIUM;
+		return (ft_mode_status(options, MEDIUM));
 	else if ((ft_strncmp(cursor, "--complex", 10) == 0)
 		&& (options->mode_status == 0))
-		options->mode = COMPLEX;
+		return (ft_mode_status(options, COMPLEX));
 	else if ((ft_strncmp(cursor, "--adaptive", 11) == 0)
 		&& (options->mode_status == 0))
-		options->mode = ADAPTIVE;
+		return (ft_mode_status(options, ADAPTIVE));
 	else if (ft_strncmp(cursor, "--bench", 8) == 0)
 		options->bench = true;
 	else
 		return (1);
 	return (0);
 }
+char	**ft_valid_number(char *argv)
+{
+	char	**tokens;
+	int		j;
+
+	j = 0;
+	tokens = ft_split(argv, ' ');
+	if (tokens == NULL)
+		return (1);
+	if (tokens[0] == NULL)
+	{
+		free_array(tokens);
+		return(1);
+	}
+	while (tokens[j] != NULL)
+	{
+		if (ft_is_number(tokens[j]) == 1)
+		{
+			free_array (tokens);
+			return (1);
+		}
+		j++;
+	}
+	return (tokens);
+}
 
 int	input_parser(int argc, char *argv[], t_options *options)
 {
-	char	*cursor;
 	int		i;
 
 	i = 1;
 	while (i < argc)
 	{
-		cursor = argv[i];
-		if (cursor[0] == '-' && cursor[1] == '-')
+		if (argv[i][0] == '-' && argv[i][1] == '-')
 		{
-			if (ft_flags(cursor, options) == 1)
+			if (ft_flags(argv[i], options) == 1)
 				return (1);
 		}
-		else if (ft_is_number(cursor) == 1)
+		else if (ft_valid_number(argv[i]) == 1)
 			return (1);
 		i++;
 	}

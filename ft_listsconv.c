@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_listsconv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 14:04:16 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/31 16:14:24 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/02 11:42:31 by buhankalinu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
