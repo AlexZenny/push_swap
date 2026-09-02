@@ -6,7 +6,7 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 20:47:56 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/01 02:48:28 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/02 04:12:54 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,25 @@ static void	two_sort(t_data *data)
 
 static void	three_sort(t_data *data)
 {
-	if (data->stack_a->value > data->stack_a->next->value)
+	int	a;
+	int	b;
+	int	c;
+
+	a = data->stack_a->value;
+	b = data->stack_a->next->value;
+	c = data->stack_a->prev->value;
+	if (a > b && b < c && a < c)
 		sa(data);
-	if (data->stack_a->value > data->stack_a->prev->value)
-	{
+	else if (a > b && b > c)
+		sa(data);
+	else if (a > b && a > c)
 		ra(data);
+	else if (a < b && a > c)
+		rra(data);
+	else if (a < b && b > c)
+	{
+		rra(data);
 		sa(data);
-		if (data->stack_a->next->value > data->stack_a->prev->value)
-			sa(data);
 	}
 }
 
@@ -53,7 +64,7 @@ static void	five_sort(t_data *data)
 	int	dir;
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (i++ <= 1)
 	{
 		assign_ranks(&data->stack_a, 5);
