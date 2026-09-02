@@ -6,7 +6,7 @@
 /*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 20:47:56 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/02 04:12:54 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/02 04:26:03 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	five_sort(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i++ <= 1)
+	while (i <= 1)
 	{
 		assign_ranks(&data->stack_a, 5);
 		dir = find_shortest_path(&data->stack_a, i);
@@ -77,6 +77,7 @@ static void	five_sort(t_data *data)
 				rra(data);
 		}
 		pb(data);
+		i++;
 	}
 	three_sort(data);
 	pa(data);
