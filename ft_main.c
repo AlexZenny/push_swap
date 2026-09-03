@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/09/03 18:07:09 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/03 22:07:11 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,18 @@ int	ft_flags(const char *cursor, t_options *options)
 		return (1);
 	return (0);
 }
-char	**ft_split_argv (char *argv)
+int	ft_split_argv (char *argv, char **tokens)
 {
-	char	**tokens;
-	int		i;
-
-	i = 0;
-	while (argv[i] != NULL)
-	{
-		tokens = ft_split(argv[i], ' ');
-		i++;
-	}
+	tokens = ft_split(argv, ' ');
 	if (tokens == NULL)
-		return (1);
+		return (NULL);
 	if (tokens[0] == NULL)
 	{
-		free_array(tokens);
+		free(tokens);
 		return(1);
 	}
-	return (tokens);
+	return (0);
 }
-
 
 int count_tokens(char *argv)
 {
@@ -83,40 +74,61 @@ int count_tokens(char *argv)
 	}	
 	return(count);
 }
-int validate_token(char **token, )
+int validate_token(char *token, int *array)
 {
-
+	long	value;
+	
+	if (ft_is_number(token) == 0)
+	{
+		value = ft_atol(token);
+		if (value > INT_MAX || value < INT_MIN)
+			return (-1);	
+		*array = ( int)value;
+	}
+	return (0);
 }
-        if (ft_is_number(array[j]) == 0)
-        {
-            value = atoi(argv[i]);
-            array[j] = value;
-            j++;
-        }
+int adding_numbers(char **tokens, int *array)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+
+	while (tokens[j])
+	{
+		if (validate_token(&token[j], &array[i]) == 0)
+		{
+			j++;
+			i++;
+		}
+		else
+			return (-1);
+	}
+	return (0);
+}
+
 int *ft_create_array(char *argv[])
 {
-    long value;
-    int *array;
+    int		*array;
     int      i;
-    //int      j;
 	int		count;
-	char	**token;
+	char	**tokens;
 
     i = 0;
-    j = 0;
-	count = count_tokens(argv[i]);
+	while (argv[i])
+		count = count_tokens(argv[i]);
+	if (count == -1)
+		return (NULL);
     array = malloc(count*sizeof(*array));
     if (array == NULL)
         return(NULL);
-    while (i < count)
-    {
-		token = ft_split_argv(argv[i]);
-		array[j]
-
-		else
-			free_array (argv[i]);
-        i++;
-    }
+	while ( i < count )
+	{
+		tokens = ft_split_argv(argv[i]);
+		adding_numbers(*token, array);
+		i++;
+	}
     return(array);
 }
 int	input_parser(int argc, char *argv[], t_options *options)
