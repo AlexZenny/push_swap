@@ -87,7 +87,7 @@ long				ft_atol(const char *nptr);
 int					ft_sqrt(int n);
 int					ft_is_dublicate(t_list **stack_a, int value);
 int					ft_is_number(char *str);
-int					ft_create_stack(int argc, char *argv[], t_list **stack_a);
+int					ft_create_stack(int *arr, int n, t_list **stack_a);
 int					ft_mode_status(t_options *options, t_mode mode);
 int					ft_flags(const char *cursor, t_options *options);
 int					input_parser(int argc, char **argv, int *arr, t_options *options);
@@ -102,7 +102,7 @@ void				simple_sort(t_data *data);
 void				medium_sort(t_data *data, int n);
 void				complex_sort(t_data *data);
 
-bool				is_sorted(t_list *stack_a);
+bool				is_sorted(t_list **stack_a);
 int					find_min_position(t_list *stack_a);
 int					rotation(t_data *data, int min_position);
 int					stack_len(t_list *stack_a);

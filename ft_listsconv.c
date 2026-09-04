@@ -99,26 +99,40 @@ int	ft_is_number(char *str)
 	return (0);
 }
 
-int	ft_create_stack(int argc, char *argv[], t_list **stack_a)
+int	ft_create_stack(int *arr, int n, t_list **stack_a)
 {
-	long	value;
 	int		i;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (i < n)
 	{
-		if (argv[i][0] == '-' && argv[i][1] == '-')
-		{
-			i++;
-			continue ;
-		}
-		value = ft_atol(argv[i]);
-		if (value > INT_MAX || value < INT_MIN)
+		if (ft_is_dublicate(stack_a, arr[i]) || arr[i] > INT_MAX || arr[i] < INT_MIN)
 			return (1);
-		if (ft_is_dublicate(stack_a, value) == 1)
-			return (1);
-		ft_addback(stack_a, (int)value);
-		i++;
+		ft_addback(stack_a, arr[i++]);
 	}
 	return (0);
 }
+
+// int	ft_create_stack(int argc, char *argv[], t_list **stack_a)
+// {
+// 	long	value;
+// 	int		i;
+//
+// 	i = 1;
+// 	while (i < argc)
+// 	{
+// 		if (argv[i][0] == '-' && argv[i][1] == '-')
+// 		{
+// 			i++;
+// 			continue ;
+// 		}
+// 		value = ft_atol(argv[i]);
+// 		if (value > INT_MAX || value < INT_MIN)
+// 			return (1);
+// 		if (ft_is_dublicate(stack_a, value) == 1)
+// 			return (1);
+// 		ft_addback(stack_a, (int)value);
+// 		i++;
+// 	}
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/09/04 04:04:41 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/04 18:47:54 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,27 +138,28 @@ int	add_numbers_to_array(int *arr, char **tokens)
 
 int	ft_create_array(int argc, char **argv, int *arr)
 {
-	int		i;
-	int		count;
+	int	i;
+	int	count;
 
     i = 0;
 	count = count_tokens(argv);
 	if (count == -1)
-		return (1);
+		return (-1);
 	arr = malloc(sizeof(int) * count);
-    if (!arr)
-        return (1);
+	if (!arr)
+        return (-1);
 	while (i++ < argc)
 	{
 		if (add_numbers_to_array(arr, ft_split_arg(argv[i])))
-			return (1);
+			return (-1);
 	}
-    return(0);
+    return(count);
 }
 
 int	input_parser(int argc, char **argv, int *arr, t_options *options)
 {
 	int	i;
+	int	count;
 
 	i = 0;
 	while (++i < argc)
@@ -166,34 +167,38 @@ int	input_parser(int argc, char **argv, int *arr, t_options *options)
 		if (argv[i][0] == '-' && argv[i][1] == '-')
 		{
 			if (ft_flags(argv[i], options))
-				return (1);
+				return (-1);
 		}
 	}
-	if (ft_create_array(argc, argv, arr))
-		return (1);
-	return (0);
+	count = ft_create_array(argc, argv, arr); 
+	if (count == -1)
+		return (-1);
+	return (count);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	int		*arr;
+	int		n;
 	float	disorder;
 
+	arr = NULL;
 	initialize_data(&data);
-	if (input_parser(argc, argv, arr, &data.options))
+	n = input_parser(argc, argv, arr, &data.options);
+	if (n == -1)
 	{
 		free(arr);
 		ft_printf_fd(2, "Error\n");
 		return (1);
 	}
-	if (ft_create_stack(argc, argv, &data.stack_a))
+	if (ft_create_stack(arr, n, &data.stack_a))
 	{
 		ft_printf_fd(2, "Error\n");
 		ft_deallocate(&data.stack_a);
 		return (1);
 	}
-	if (is_sorted(&data->stack_a) == true)
+	if (is_sorted(&data.stack_a) == true)
 		return (0);
 	disorder = calculate_disorder(&data.stack_a);
 	initialize_counters(&data);

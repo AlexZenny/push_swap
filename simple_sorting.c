@@ -89,15 +89,15 @@ int	find_min_position(t_list *stack_a)
 	return (min_position);
 }
 
-bool	is_sorted(t_list *stack_a)
+bool	is_sorted(t_list **stack_a)
 {
 	t_list	*head;
 	t_list	*prev_node;
 	t_list	*next_node;
 
-	if (stack_a == NULL)
+	if ((*stack_a) == NULL)
 		return (false);
-	head = stack_a;
+	head = (*stack_a);
 	prev_node = head;
 	next_node = prev_node->next;
 	while (next_node != head)
@@ -117,7 +117,7 @@ void	simple_sort(t_data *data)
 	min_position = 0;
 	if (data->stack_a == NULL)
 		return ;
-	if (is_sorted(data->stack_a))
+	if (is_sorted(&data->stack_a))
 		return ;
 	while (data->stack_a != NULL)
 	{

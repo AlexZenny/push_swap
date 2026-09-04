@@ -15,7 +15,8 @@ CFILES = ft_listsconv.c\
 	ft_printf/ft_printf.c\
 	ft_printf/ft_extras.c\
 	general_utils.c\
-	init.c
+	init.c\
+	split.c
 
 OBJ_DIR = obj
 
