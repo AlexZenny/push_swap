@@ -90,7 +90,7 @@ int					ft_is_number(char *str);
 int					ft_create_stack(int argc, char *argv[], t_list **stack_a);
 int					ft_mode_status(t_options *options, t_mode mode);
 int					ft_flags(const char *cursor, t_options *options);
-int					input_parser(int argc, char *argv[], t_options *options);
+int					input_parser(int argc, char **argv, int *arr, t_options *options);
 void				initialize_data(t_data *data);
 void				initialize_counters(t_data *data);
 float				calculate_disorder(t_list **stack);
