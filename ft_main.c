@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:43:06 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/09/04 18:47:54 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/05 01:17:41 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,28 @@ char	**ft_split_arg(char *arg)
 }
 
 int	count_tokens(char **argv)
-{
-	int	i;
-	int	j;
-	int	count;
+{	
+	bool	num_found;
+	int		count;
+	int		i;
+	int		k;
 
 	i = 0;
-	j = 0;
 	count = 0;
-	while (argv[i])
+	while (argv[++i])
 	{
-		while (argv[i][j] == ' ')
-			j++;
-		if (argv[i][j])
+		k = 0;
+		num_found = false;
+		while (argv[i][k])
 		{
-			count++;
-			while (argv[i][j] && argv[i][j] != ' ')
-				j++;
+			if (argv[i][k] != ' ' && (!num_found))
+			{
+				num_found = true;
+				count++;
+			}
+			if (argv[i][k++] == ' ')
+				num_found = false;
 		}
-		else
-			return (-1);
-		i++;
 	}
 	return (count);
 }
@@ -116,9 +117,8 @@ int	count_tokens(char **argv)
 // 	return (0);
 // }
 
-int	add_numbers_to_array(int *arr, char **tokens)
+int	add_numbers_to_array(int **arr, int *index, char **tokens)
 {
-	static int	j = 0;
 	int			i;
 	long		value;
 
@@ -127,36 +127,41 @@ int	add_numbers_to_array(int *arr, char **tokens)
 	{
 		if (!ft_is_number(tokens[i]))
 		{
-			value = ft_atol(tokens[i++]);
+			value = ft_atol(tokens[i]);
 			if (value > INT_MAX || value < INT_MIN)
 				return (1);
-			arr[j++] = (int)value;
+			*arr[(*index)++] = (int)value;
 		}
+		else
+			return (1);
+		i++;
 	}
 	return (0);
 }
 
-int	ft_create_array(int argc, char **argv, int *arr)
+int	ft_create_array(int argc, char **argv, int **arr)
 {
 	int	i;
 	int	count;
+	int	index;
 
     i = 0;
+	index = 0;
 	count = count_tokens(argv);
 	if (count == -1)
 		return (-1);
 	arr = malloc(sizeof(int) * count);
 	if (!arr)
         return (-1);
-	while (i++ < argc)
+	while (++i < argc)
 	{
-		if (add_numbers_to_array(arr, ft_split_arg(argv[i])))
+		if (add_numbers_to_array(arr, &index, ft_split_arg(argv[i])))
 			return (-1);
 	}
     return(count);
 }
 
-int	input_parser(int argc, char **argv, int *arr, t_options *options)
+int	input_parser(int argc, char **argv, int **arr, t_options *options)
 {
 	int	i;
 	int	count;
@@ -185,14 +190,14 @@ int	main(int argc, char **argv)
 
 	arr = NULL;
 	initialize_data(&data);
-	n = input_parser(argc, argv, arr, &data.options);
+	n = input_parser(argc, argv, &arr, &data.options);
 	if (n == -1)
 	{
 		free(arr);
 		ft_printf_fd(2, "Error\n");
 		return (1);
 	}
-	if (ft_create_stack(arr, n, &data.stack_a))
+	if (ft_create_stack(&arr, n, &data.stack_a))
 	{
 		ft_printf_fd(2, "Error\n");
 		ft_deallocate(&data.stack_a);

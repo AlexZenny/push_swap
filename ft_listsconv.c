@@ -99,16 +99,16 @@ int	ft_is_number(char *str)
 	return (0);
 }
 
-int	ft_create_stack(int *arr, int n, t_list **stack_a)
+int	ft_create_stack(int **arr, int n, t_list **stack_a)
 {
 	int		i;
 
 	i = 0;
 	while (i < n)
 	{
-		if (ft_is_dublicate(stack_a, arr[i]) || arr[i] > INT_MAX || arr[i] < INT_MIN)
+		if (ft_is_dublicate(stack_a, *arr[i]) || *arr[i] > INT_MAX || *arr[i] < INT_MIN)
 			return (1);
-		ft_addback(stack_a, arr[i++]);
+		ft_addback(stack_a, *arr[i++]);
 	}
 	return (0);
 }
