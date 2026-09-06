@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/05 12:31:03 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/05 14:48:23 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 16:59:14 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,36 @@ int	check_flags(char *arg, t_options *opt)
 	}
 	return (1);
 }
-
+int error(t_data *data)
+{
+	ft_printf_fd(2, "Error\n");
+	ft_deallocate(&data->stack_a);
+	ft_deallocate(&data->stack_b);
+	return (0);
+}
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	float	disorder;
 
-	(void)argc;
+	if (argc == 1)
+		return (0);
+	//(void)argc;
 	initialize_data(&data);
 	if (parse_input(argv, &data))
-		ft_printf_fd(2, "Error\n");
+		return (error(&data));
 	if (is_sorted(&data.stack_a))
+	{
+		ft_deallocate(&data.stack_a);
+		ft_deallocate(&data.stack_b);
 		return (0);
+	}
 	disorder = calculate_disorder(&data.stack_a);
 	initialize_counters(&data);
-	select_sort(&data, disorder);
+	adaptive_sort(&data, disorder);
 	if (data.options.bench == true)
 		benchmark_mode(&data, disorder);
+	ft_deallocate(&data.stack_a);
 	ft_deallocate(&data.stack_b);
 	return (0);
 }

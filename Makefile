@@ -1,33 +1,32 @@
-CFILES = ft_listsconv.c\
-	rotate_ops.c\
-	rev_rotate_ops.c\
-	swap_ops.c\
-	push_ops.c\
-	disorder.c\
-	benchmark.c\
-	sorting_selector.c\
-	tiny_sorting.c\
-	simple_sorting.c\
-	medium_sorting.c\
-	medium_sorting_utils.c\
-	complex_sorting.c\
+CFILES = push_swap.c\
+	parser/parser_utils.c\
+	parser/split_arg.c\
+	parser/stack_funcs.c\
+	operations/rotate_ops.c\
+	operations/rev_rotate_ops.c\
+	operations/swap_ops.c\
+	operations/push_ops.c\
+	algorithms/disorder.c\
+	algorithms/sorting_selector.c\
+	algorithms/tiny_sorting.c\
+	algorithms/simple_sorting.c\
+	algorithms/medium_sorting.c\
+	algorithms/medium_sorting_utils.c\
+	algorithms/complex_sorting.c\
 	ft_printf/ft_printf.c\
 	ft_printf/ft_extras.c\
 	general_utils.c\
-	init.c\
-	split.c\
 	general_utils_2.c\
-	parser_utils.c\
-	push_swap.c\
-	split_arg.c\
-	stack_creator.c
+	init_structs.c\
+	split.c\
+	benchmark.c
 
 OBJ_DIR = obj
 
 OBJFILES = $(CFILES:%.c=$(OBJ_DIR)/%.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -I.
 
 NAME = push_swap
 all: $(NAME) 

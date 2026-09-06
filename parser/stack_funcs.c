@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_creator.c                                    :+:      :+:    :+:   */
+/*   stack_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 03:45:48 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 03:45:48 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 15:28:39 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_for_duplicates(t_list **stack_a, int value)
 	t_list	*temp;
 
 	temp = (*stack_a)->next;
+	if (*stack_a == NULL || stack_a == NULL)
+		return (0);
 	while (temp != *stack_a)
 	{
 		if (temp->value == value)
@@ -64,4 +66,24 @@ int	lst_add_new(const char *token, t_list **stack_a)
 		*stack_a = new;
 	}
 	return (0);
+}
+
+void	ft_deallocate(t_list **stack_a)
+{
+	t_list	*curr;
+	t_list	*next;
+	t_list	*first;
+
+	if (stack_a == NULL || *stack_a == NULL)
+		return ;
+	first = *stack_a;
+	curr = first->next;
+	while (curr != first)
+	{
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
+	free(first);
+	*stack_a = NULL;
 }

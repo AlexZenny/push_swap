@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 03:40:41 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 03:40:41 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 18:10:58 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	parse_tokens(const char *arg, bool multiple_tokens, t_list **stack_a)
 		while (tokens[i])
 		{
 			if (!lst_add_new(tokens[i], stack_a))
+				free(tokens[i++]);
+			else
 			{
 				free(tokens[i]);
-				i++;
-			}
-			else
+				free(tokens);
 				return (1);
+			}
 		}
 		free(tokens);
 	}

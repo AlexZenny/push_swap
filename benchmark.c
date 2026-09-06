@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 19:32:35 by buhankalinu       #+#    #+#             */
-/*   Updated: 2026/08/31 16:26:45 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/06 13:05:42 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	print_complexity(float dis)
 {
 	if (dis < 0.2)
 		ft_printf_fd(2, "O(n^2)\n");
-	if (dis > 0.2 && dis < 0.5)
+	if (dis >= 0.2 && dis < 0.5)
 		ft_printf_fd(2, "O(n√n)\n");
-	if (dis > 0.5)
+	if (dis >= 0.5)
 		ft_printf_fd(2, "O(n log n)\n");
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 03:43:57 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 16:59:37 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void				initialize_counters(t_data *data);
 float				calculate_disorder(t_list **stack);
 int					count_stack_members(t_list **stack);
 
-void				select_sort(t_data *data, float disorder);
+void				adaptive_sort(t_data *data, float disorder);
 void				tiny_sort(t_data *data, int n);
 void				simple_sort(t_data *data);
 void				medium_sort(t_data *data, int n);
@@ -118,6 +118,7 @@ int					find_largest_rank(t_list *stack_a);
 int					count_bits(int max_rank);
 void				benchmark_mode(t_data *data, float dis);
 char				**ft_split(char const *s, char c);
+int 				error(t_data *data);
 
 void				ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b);
 void				ft_print_stack(int fd, t_list **stack);
