@@ -3,7 +3,6 @@ CFILES = ft_listsconv.c\
 	rev_rotate_ops.c\
 	swap_ops.c\
 	push_ops.c\
-	ft_main.c\
 	disorder.c\
 	benchmark.c\
 	sorting_selector.c\
@@ -16,7 +15,12 @@ CFILES = ft_listsconv.c\
 	ft_printf/ft_extras.c\
 	general_utils.c\
 	init.c\
-	split.c
+	split.c\
+	general_utils_2.c\
+	parser_utils.c\
+	push_swap.c\
+	split_arg.c\
+	stack_creator.c
 
 OBJ_DIR = obj
 

@@ -6,7 +6,7 @@
 /*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/02 11:03:01 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/09/06 03:43:57 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,12 @@ void				simple_sort(t_data *data);
 void				medium_sort(t_data *data, int n);
 void				complex_sort(t_data *data);
 
+char				**split_arg(char const *arg);
+int					check_flags(char *arg, t_options *opt);
+int					parse_input(char **argv, t_data *data);
+int					lst_add_new(const char *token, t_list **stack_a);
+int					is_num(char c);
+int					is_whitespace(char c);
 bool				is_sorted(t_list **stack_a);
 int					find_min_position(t_list *stack_a);
 int					rotation(t_data *data, int min_position);
@@ -112,5 +118,7 @@ int					find_largest_rank(t_list *stack_a);
 int					count_bits(int max_rank);
 void				benchmark_mode(t_data *data, float dis);
 char				**ft_split(char const *s, char c);
+
 void				ft_print_stacks(int fd, t_list **stack_a, t_list **stack_b);
+void				ft_print_stack(int fd, t_list **stack);
 #endif

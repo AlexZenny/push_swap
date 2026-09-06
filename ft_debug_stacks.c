@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	ft_print_stack(int fd, t_list **stack)
+void	ft_print_stack(int fd, t_list **stack)
 {
     t_list *temp;
 
