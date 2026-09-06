@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/05 16:11:05 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/05 20:13:25 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 18:32:02 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ char	**split_arg(char const *arg)
 	lens = malloc(sizeof(int) * count);
 	if (!lens)
 		return (NULL);
+	i = 0;
+	while (i < count)
+		lens[i++] = 0;
 	count_token_lens(arg, lens);
 	subs = allocate_subs(count, lens);
 	free(lens);

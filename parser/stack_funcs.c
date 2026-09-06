@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 03:45:48 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 15:28:39 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/06 18:38:31 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int	lst_add_new(const char *token, t_list **stack_a)
 {
 	t_list  *new;
 
+	if (!token)
+		return(1);
 	new = malloc(sizeof(t_list));
-	if (!new || !token)
+	if (!new)
 			return (1);
 	new->value = ft_atol(token);
 	if (*stack_a)
