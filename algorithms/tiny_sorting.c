@@ -65,9 +65,9 @@ static void	five_sort(t_data *data)
 	int	i;
 
 	i = 0;
+	assign_ranks(&data->stack_a, 5);
 	while (i <= 1)
 	{
-		assign_ranks(&data->stack_a, 5);
 		dir = find_shortest_path(&data->stack_a, i);
 		while (data->stack_a->rank != i)
 		{
@@ -80,8 +80,8 @@ static void	five_sort(t_data *data)
 		i++;
 	}
 	three_sort(data);
-	pa(data);
-	pa(data);
+	while (data->stack_b != NULL)
+		pa(data);
 }
 
 void	tiny_sort(t_data *data, int n)

@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:33:55 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/31 16:09:01 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/06 17:30:29 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	swap(t_list **stack)
 {
 	t_list	*temp;
 
-	temp = (*stack);
+	temp = *stack;
 	*stack = temp->next;
 	temp->next = (*stack)->next;
 	(*stack)->next = temp;
-	(*stack)->prev = temp->prev;
-	temp->prev = (*stack);
+	temp->prev = (*stack)->prev;
+	(*stack)->prev = temp;
 	temp->next->prev = temp;
 	(*stack)->prev->next = *stack;
 }
