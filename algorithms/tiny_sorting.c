@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tiny_sorting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azieniuk <azieniuk@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 20:47:56 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/02 04:26:03 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 21:09:41 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	three_sort(t_data *data)
 	int	b;
 	int	c;
 
-	a = data->stack_a->value;
-	b = data->stack_a->next->value;
-	c = data->stack_a->prev->value;
+	a = data->stack_a->rank;
+	b = data->stack_a->next->rank;
+	c = data->stack_a->prev->rank;
 	if (a > b && b < c && a < c)
 		sa(data);
 	else if (a > b && b > c)
@@ -77,6 +77,7 @@ static void	five_sort(t_data *data)
 				rra(data);
 		}
 		pb(data);
+		ft_print_stacks(1, &data->stack_a, &data->stack_b);
 		i++;
 	}
 	three_sort(data);
@@ -92,6 +93,6 @@ void	tiny_sort(t_data *data, int n)
 		three_sort(data);
 	else if (n == 4)
 		four_sort(data);
-	else
+	else if (n == 5)
 		five_sort(data);
 }

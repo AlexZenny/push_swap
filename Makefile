@@ -19,7 +19,8 @@ CFILES = push_swap.c\
 	general_utils_2.c\
 	init_structs.c\
 	split.c\
-	benchmark.c
+	benchmark.c\
+	ft_debug_stacks.c
 
 OBJ_DIR = obj
 

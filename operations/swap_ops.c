@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:33:55 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 17:30:29 by azieniuk         ###   ########.fr       */
+/*   Updated: 2026/09/06 21:15:35 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,27 @@
 
 static void	swap(t_list **stack)
 {
-	t_list	*temp;
+	t_list	*first;
+	t_list	*second;
+	t_list	*before;
+	t_list	*after;
 
-	temp = *stack;
-	*stack = temp->next;
-	temp->next = (*stack)->next;
-	(*stack)->next = temp;
-	temp->prev = (*stack)->prev;
-	(*stack)->prev = temp;
-	temp->next->prev = temp;
-	(*stack)->prev->next = *stack;
+	first = *stack;
+	second = first->next;
+	if (second == first->prev)
+	{
+		*stack = second;
+		return ;
+	}
+	before = first->prev;
+	after = second->next;
+	before->next = second;
+	second->prev = before;
+	second->next = first;
+	first->prev = second;
+	first->next = after;
+	after->prev = first;
+	*stack = second;
 }
 
 int	sa(t_data *data)
