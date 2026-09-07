@@ -18,15 +18,14 @@ CFILES = push_swap.c\
 	general_utils.c\
 	general_utils_2.c\
 	init_structs.c\
-	split.c\
-	benchmark.c\
+	benchmark.c
 
 OBJ_DIR = obj
 
 OBJFILES = $(CFILES:%.c=$(OBJ_DIR)/%.o)
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I.
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I.
 
 NAME = push_swap
 all: $(NAME) 

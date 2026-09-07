@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_extras.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buhankalinux <buhankalinux@student.42.f    +#+  +:+       +#+        */
+/*   By: buhankalinux <buhankalinux@student.42.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 01:35:28 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/26 20:07:03 by buhankalinu      ###   ########.fr       */
+/*   Updated: 2026/09/07 17:38:36 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 19:14:40 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 16:59:37 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/07 17:17:22 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct s_list
@@ -67,57 +66,60 @@ typedef struct s_data
 	t_ops_counters	ops;
 }					t_data;
 
-int			pa(t_data *data);
-int			pb(t_data *data);
-int			sa(t_data *data);
-int			sb(t_data *data);
-int			ss(t_data *data);
-void		ft_rotate(t_list **stack);
-int			ra(t_data *data);
-int			rb(t_data *data);
-int			rr(t_data *data);
-void		ft_rev_rotate(t_list **stack);
-int			rra(t_data *data);
-int			rrb(t_data *data);
-int			rrr(t_data *data);
-void		ft_addback(t_list **stack_a, int i);
-void		ft_deallocate(t_list **stack_a);
-int			ft_strncmp(const char *s1, const char *s2, size_t size);
-long		ft_atol(const char *nptr);
-int			ft_sqrt(int n);
-int			ft_is_dublicate(t_list **stack_a, int value);
-int			ft_is_number(char *str);
-int			ft_create_stack(int **arr, int n, t_list **stack_a);
-int			ft_mode_status(t_options *options, t_mode mode);
-int			ft_flags(const char *cursor, t_options *options);
-int			input_parser(int argc, char **argv, int **arr, t_options *options);
-void		initialize_data(t_data *data);
-void		initialize_counters(t_data *data);
-float		calculate_disorder(t_list **stack);
-int			count_stack_members(t_list **stack);
-
-void		adaptive_sort(t_data *data, float disorder);
-void		tiny_sort(t_data *data, int n);
-void		simple_sort(t_data *data);
-void		medium_sort(t_data *data, int n);
-void		complex_sort(t_data *data);
-
-char		**split_arg(char const *arg);
-int			check_flags(char *arg, t_options *opt);
-int			parse_input(char **argv, t_data *data);
-int			lst_add_new(const char *token, t_list **stack_a);
-int			is_num(char c);
-int			is_whitespace(char c);
-int			is_minus(char c);
-bool		is_sorted(t_list **stack_a);
-int			find_min_position(t_list *stack_a);
-int			rotation(t_data *data, int min_position);
-int			stack_len(t_list *stack_a);
-void		assign_ranks(t_list **stack_a, int n);
-int			find_shortest_path(t_list **stack, int target_rank);
-int			find_largest_rank(t_list *stack_a);
-int			count_bits(int max_rank);
-void		benchmark_mode(t_data *data, float dis);
-char		**ft_split(char const *s, char c);
-int			error(t_data *data);
+int		count_bits(int max_rank);
+int		find_largest_rank(t_list *stack_a);
+void	complex_sort(t_data *data);
+float	calculate_disorder(t_list **stack);
+int		*find_chunk_sizes(int n, int c_count);
+int		pb_chunk(t_data *data, int c_size, int n);
+void	extract_chunk(t_data *data, int c_size, int *max_rank);
+void	medium_sort(t_data *data, int n);
+void	assign_ranks(t_list **stack_a, int n);
+int		find_shortest_path(t_list **stack, int target_rank);
+int		stack_len(t_list *stack_a);
+int		rotation(t_data *data, int min_position);
+int		find_min_position(t_list *stack_a);
+bool	is_sorted(t_list **stack_a);
+void	simple_sort(t_data *data);
+void	adaptive_sort(t_data *data, float dis);
+void	tiny_sort(t_data *data, int n);
+int		pa(t_data *data);
+int		pb(t_data *data);
+void	ft_rev_rotate(t_list **stack);
+int		rra(t_data *data);
+int		rrb(t_data *data);
+int		rrr(t_data *data);
+void	ft_rotate(t_list **stack);
+int		ra(t_data *data);
+int		rb(t_data *data);
+int		rr(t_data *data);
+int		sa(t_data *data);
+int		sb(t_data *data);
+int		ss(t_data *data);
+int		parse_tokens(const char *arg, bool multiple_tokens, t_list **stack_a);
+int		parse_arg(const char *arg, t_list **stack_a);
+int		parse_input(char **argv, t_data *data);
+int		count_tokens(char const *arg);
+void	count_token_lens(char const *arg, int *lens);
+void	fill_sub(char const *arg, char *sub, int *idx);
+char	**allocate_subs(int count, int *lens);
+char	**split_arg(char const *arg);
+int		check_for_duplicates(t_list **stack_a, int value);
+void	lst_add_back(t_list **stack_a, t_list *new);
+int		lst_add_new(const char *token, t_list **stack_a);
+void	ft_deallocate(t_list **stack_a);
+void	print_complexity(float dis);
+void	benchmark_mode(t_data *data, float dis);
+int		ft_sqrt(int n);
+int		count_stack_members(t_list **stack);
+long	ft_atol(const char *nptr);
+int		ft_strncmp(const char *s1, const char *s2, size_t size);
+int		is_num(char c);
+int		is_whitespace(char c);
+int		is_minus(char c);
+void	initialize_counters(t_data *data);
+void	initialize_data(t_data *data);
+int		set_algorithm(t_options *opt, t_mode mode);
+int		check_flags(char *arg, t_options *opt);
+int		error(t_data *data);
 #endif

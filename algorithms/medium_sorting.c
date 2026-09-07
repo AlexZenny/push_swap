@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 21:15:21 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/08/31 16:05:02 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/07 18:28:29 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	*find_chunk_sizes(int n, int c_count)
 	i = 0;
 	while (i < c_count)
 	{
-		c_sizes[i] = c_count;
-		if (rem-- > 0)
+		c_sizes[i] = n / c_count;
+		if (i < n % c_count)
 			c_sizes[i]++;
 		i++;
 	}
