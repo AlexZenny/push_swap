@@ -6,13 +6,13 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/05 12:31:03 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 16:59:14 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/07 02:31:45 by azieniuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int set_algorithm(t_options *opt, t_mode mode)
+int	set_algorithm(t_options *opt, t_mode mode)
 {
 	if (opt->mode_status == 1)
 		return (1);
@@ -38,13 +38,15 @@ int	check_flags(char *arg, t_options *opt)
 	}
 	return (1);
 }
-int error(t_data *data)
+
+int	error(t_data *data)
 {
 	ft_printf_fd(2, "Error\n");
 	ft_deallocate(&data->stack_a);
 	ft_deallocate(&data->stack_b);
 	return (0);
 }
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -52,7 +54,6 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-	//(void)argc;
 	initialize_data(&data);
 	if (parse_input(argv, &data))
 		return (error(&data));
@@ -65,22 +66,9 @@ int	main(int argc, char **argv)
 	disorder = calculate_disorder(&data.stack_a);
 	initialize_counters(&data);
 	adaptive_sort(&data, disorder);
-	if (data.options.bench == true)
+	if (data.options.bench == true && data.stack_a)
 		benchmark_mode(&data, disorder);
 	ft_deallocate(&data.stack_a);
 	ft_deallocate(&data.stack_b);
 	return (0);
 }
-// #include <stdio.h>
-//
-// int	main(void)
-// {
-// 	char	*str = "1 2 3";
-// 	int		res;
-//
-// 	res = parse_arg(res);
-// 	if (res)
-// 		printf("Error\n");
-// 	else
-// 		printf("Success\n");
-// }

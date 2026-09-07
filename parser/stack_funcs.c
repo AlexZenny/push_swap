@@ -32,10 +32,9 @@ int	check_for_duplicates(t_list **stack_a, int value)
 
 void	lst_add_back(t_list **stack_a, t_list *new)
 {
-	t_list  *last;
+	t_list	*last;
 
 	last = (*stack_a)->prev;
-
 	last->next = new;
 	new->prev = last;
 	new->next = *stack_a;
@@ -44,13 +43,13 @@ void	lst_add_back(t_list **stack_a, t_list *new)
 
 int	lst_add_new(const char *token, t_list **stack_a)
 {
-	t_list  *new;
+	t_list	*new;
 
 	if (!token)
-		return(1);
+		return (1);
 	new = malloc(sizeof(t_list));
 	if (!new)
-			return (1);
+		return (1);
 	new->value = ft_atol(token);
 	if (*stack_a)
 	{

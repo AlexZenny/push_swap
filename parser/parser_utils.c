@@ -55,8 +55,8 @@ int	parse_arg(const char *arg, t_list **stack_a)
 			multiple_tokens = true;
 			continue ;
 		}
-		if (is_num(arg[i]))
-				return (1);
+		if (is_num(arg[i]) && (is_minus(arg[i]) || is_num(arg[i + 1])))
+			return (1);
 		i++;
 	}
 	if (parse_tokens(arg, multiple_tokens, stack_a))
@@ -64,7 +64,7 @@ int	parse_arg(const char *arg, t_list **stack_a)
 	return (0);
 }
 
-int parse_input(char **argv, t_data *data)
+int	parse_input(char **argv, t_data *data)
 {
 	int	i;
 
@@ -84,4 +84,3 @@ int parse_input(char **argv, t_data *data)
 	}
 	return (0);
 }
-

@@ -26,18 +26,18 @@ static void	three_sort(t_data *data)
 	a = data->stack_a->value;
 	b = data->stack_a->next->value;
 	c = data->stack_a->prev->value;
-	if (a > b && b < c && c < a)  
+	if (a > b && b < c && c < a)
 		ra(data);
 	else if (a > b && b > c && c < a)
 	{
 		sa(data);
 		rra(data);
-	} 
-	else if (a < b && b > c && a > c) 
+	}
+	else if (a < b && b > c && a > c)
 		rra(data);
-	else if (a > b && c > b && a < c) 
+	else if (a > b && c > b && a < c)
 		sa(data);
-	else if (a < b && a < c && b > c) 
+	else if (a < b && a < c && b > c)
 	{
 		rra(data);
 		sa(data);

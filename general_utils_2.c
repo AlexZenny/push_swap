@@ -25,3 +25,10 @@ int	is_whitespace(char c)
 		return (0);
 	return (1);
 }
+
+int	is_minus(char c)
+{
+	if (c == '-')
+		return (0);
+	return (1);
+}

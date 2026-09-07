@@ -23,7 +23,8 @@ int	count_tokens(char const *arg)
 	inside_num = false;
 	while (arg[i])
 	{
-		if (!is_num(arg[i]))
+		if (!is_num(arg[i])
+			|| (!is_minus(arg[i]) && !is_num(arg[i + 1]) && !inside_num))
 		{
 			if (!inside_num)
 			{
@@ -40,7 +41,7 @@ int	count_tokens(char const *arg)
 	return (count);
 }
 
-void	count_token_lens(char const *arg, int *sizes)
+void	count_token_lens(char const *arg, int *lens)
 {
 	bool	inside_num;
 	int		i;
@@ -53,15 +54,16 @@ void	count_token_lens(char const *arg, int *sizes)
 	{
 		if (!is_whitespace(arg[i]))
 			inside_num = false;
-		else if (!is_num(arg[i]))
+		else if (!is_num(arg[i])
+			|| (!is_minus(arg[i]) && !is_num(arg[i + 1]) && !inside_num))
 		{
 			if (inside_num)
-				sizes[k]++;
+				lens[k]++;
 			else
 			{
 				inside_num = true;
 				k++;
-				sizes[k]++;
+				lens[k]++;
 			}
 		}
 		i++;
@@ -79,7 +81,8 @@ void	fill_sub(char const *arg, char *sub, int *idx)
 			(*idx)++;
 		else
 		{
-			while (!is_num(arg[*idx]))
+			while (!is_num(arg[*idx])
+				|| (!is_minus(arg[*idx]) && !is_num(arg[(*idx) + 1])))
 				sub[k++] = arg[(*idx)++];
 			sub[k] = '\0';
 			return ;
@@ -87,7 +90,7 @@ void	fill_sub(char const *arg, char *sub, int *idx)
 	}
 }
 
-char	**allocate_subs(int count, int *sizes)
+char	**allocate_subs(int count, int *lens)
 {
 	char	**subs;
 	int		i;
@@ -98,7 +101,7 @@ char	**allocate_subs(int count, int *sizes)
 	i = 0;
 	while (i < count)
 	{
-		subs[i] = malloc(sizeof(char) * (sizes[i] + 1));
+		subs[i] = malloc(sizeof(char) * (lens[i] + 1));
 		if (!subs[i])
 		{
 			while (--i >= 0)

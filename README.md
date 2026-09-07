@@ -100,6 +100,8 @@ Validation should cover:
 
 - duplicate integers;
 
+- duplicate flags;
+
 - invalid flags;
 
 - multiple strategy selectors;
