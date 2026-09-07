@@ -346,19 +346,31 @@ Example redirection:
 
 ## Error Handling and Memory Management
 
-> **TODO:** Describe your cleanup strategy.
 
-Include:
+### Cleanup Strategy
 
-- freeing `ft_split` arrays;
-- freeing circular linked-list nodes;
-- cleanup after allocation failure;
-- cleanup after invalid input;
-- avoiding leaks when parsing stops midway.
+
+The program uses separate cleanup functions for linked-list stacks and dynamically allocated token arrays.
+
+- `ft_deallocate()` frees every node in the circular doubly linked list. Since the list is circular, it stores the first node, walks until it reaches that node again, frees each node, then sets the stack pointer to `NULL`.
+- Split/token memory is freed immediately after use. Each allocated token string is freed first, followed by the `char **` array itself.
+- If parsing fails partway through, already allocated token memory is freed before returning an error.
+- Stack cleanup is also performed on normal exit and error paths so that partially built stacks do not remain allocated.
+
+
+Memory management was checked with Valgrind.
+
+
+Example:
+
+
+```bash
+valgrind --leak-check=full --show-leak-kinds=all ./push_swap 3 2 1
+```
 
 Errors go to `stderr`; normal operations go to `stdout`.
 
-## Resources
+### Resources
 
 The following resources were useful for understanding the concepts and
 algorithms used in this project:

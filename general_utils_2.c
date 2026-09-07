@@ -6,7 +6,7 @@
 /*   By: tmalyshi <tmalyshi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 00:47:56 by azieniuk          #+#    #+#             */
-/*   Updated: 2026/09/06 15:28:39 by tmalyshi         ###   ########.fr       */
+/*   Updated: 2026/09/07 16:31:31 by tmalyshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_whitespace(char c)
 
 int	is_minus(char c)
 {
-	if (c == '-')
+	if (c == '-' || c == '+')
 		return (0);
 	return (1);
 }
